@@ -206,7 +206,7 @@ async function generateResult(){
     goTo('result');
   } catch(e){
     // fallback
-    document.getElementById('result-summary').innerHTML='コンディションを読み取りました';
+    document.getElementById('result-summary').innerHTML='現在混み合っています。<br>画面下部の RECHECK よりもう一度お試しください。';
     document.getElementById('result-insight').innerHTML='選択いただいた内容をもとに、今のあなたに必要なケアをお伝えします。';
     document.getElementById('result-action').innerHTML='まず今日一つ、小さなことから始めてみましょう。';
     document.getElementById('result-evidence').innerHTML='日々の小さな習慣の積み重ねが、身体と心を整えていきます。';
