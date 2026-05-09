@@ -199,10 +199,11 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     var text = data.candidates[0].content.parts.map(function(i){return i.text||'';}).join('');
     text = text.replace(/```json|```/g,'').trim();
     var r = JSON.parse(text);
+    function fmt(t){return (t||'').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');}
     document.getElementById('result-summary').innerHTML=r.summary.replace(/\n/g,'<br>');
-    document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong><br>'+r.insight.replace(/\n/g,'<br>');
-    document.getElementById('result-action').innerHTML='<strong>'+r.action_title+'</strong><br>'+r.action.replace(/\n/g,'<br>');
-    document.getElementById('result-evidence').innerHTML='<strong>'+r.evidence_title+'</strong><br>'+r.evidence.replace(/\n/g,'<br>');
+    document.getElementById('result-insight').innerHTML=fmt(r.insight_title)+'<br>'+fmt(r.insight);
+    document.getElementById('result-action').innerHTML=fmt(r.action_title)+'<br>'+fmt(r.action);
+    document.getElementById('result-evidence').innerHTML=fmt(r.evidence_title)+'<br>'+fmt(r.evidence);
     goTo('result');
   } catch(e){
     // fallback
