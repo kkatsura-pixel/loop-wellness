@@ -43,7 +43,7 @@
   .result-cond-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.3em; color: #6a6250; margin-bottom: 12px; text-transform: uppercase; }
   .result-summary { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 200; line-height: 2.1; color: #2c2820; margin-bottom: 40px; letter-spacing: 0.08em; padding-bottom: 36px; border-bottom: 1px solid #ddd8cc; }
   .result-block { margin-bottom: 32px; }
-  .result-block-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #6a6250; margin-bottom: 12px; text-transform: uppercase; border-left: 2px solid #c8c0a8; padding-left: 8px; }
+  .result-block-label { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.35em; color: #3a3428; margin-bottom: 12px; margin-top: 40px; text-transform: uppercase; border-left: 3px solid #5a5040; padding-left: 10px; }
   .result-block-body { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 200; line-height: 2.4; color: #4a4438; letter-spacing: 0.07em; }
   .result-evidence-wrap { margin-top: 24px; margin-bottom: 36px; padding: 20px 20px 20px 24px; border-left: 2px solid #c8c0a8; background: #ebe7de; }
   .result-evidence-label { font-family: 'Cormorant Garamond', serif; font-size: 9px; letter-spacing: 0.35em; color: #6a6250; margin-bottom: 10px; text-transform: uppercase; }
@@ -185,7 +185,7 @@ function goToResult(){
 }
 
 async function generateResult(){
-  var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回異なる新鮮な視点でインサイトを生成してください。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で表現（改行は\\nで）",\n  "insight": "なぜその状態かの納得感ある説明（3〜4行、改行は\\nで）",\n  "action": ""今日からできる具体的な行動。種目名・食材名・栄養素名など固有名詞を必ず含めること（3〜4行、改行は\\nで）",\n  "evidence": ""医科学的根拠を具体的に。研究名・栄養素名・数値など具体的な情報を必ず含めること（3〜4行、改行は\\nで）"\n}\n\n重要: 静かで余白のある文体で。毎回異なる角度・具体例で生成すること。';
+var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回必ず異なる視点・異なる具体例・異なるアドバイスでインサイトを生成してください。同じ内容の繰り返しは厳禁です。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で端的に表現（改行は\\nで）",\n  "insight_title": "INSIGHTの見出し。具体的な栄養素名・ホルモン名・身体部位名を必ず含む1行（例：コルチゾールが脂肪燃焼を妨げています）",\n  "insight": "なぜその状態かの説明。2〜3行（改行は\\nで）",\n  "action_title": "ACTIONの見出し。具体的な食材名・種目名・数値を必ず含む1行（例：就寝前にビタミンC500mgで回復を促す）",\n  "action": "今日からできる具体的な行動。2〜3行（改行は\\nで）",\n  "evidence_title": "EVIDENCEの見出し。研究名や栄養素名を含む1行（例：オメガ3脂肪酸が筋肉修復を促進する）",\n  "evidence": "医科学的根拠。2〜3行（改行は\\nで）"\n}\n\n重要: 静かで余白のある品のある文体で。毎回必ず異なる角度・異なる具体例で生成すること。';
 
   try {
     var resp = await fetch('https://loop-gemini-proxy.koshiro-katsura.workers.dev',{
@@ -200,7 +200,7 @@ async function generateResult(){
     text = text.replace(/```json|```/g,'').trim();
     var r = JSON.parse(text);
     document.getElementById('result-summary').innerHTML=r.summary.replace(/\n/g,'<br>');
-    document.getElementById('result-insight').innerHTML=r.insight.replace(/\n/g,'<br>');
+    document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong><br>'+r.insight.replace(/\n/g,'<br>');
     document.getElementById('result-action').innerHTML=r.action.replace(/\n/g,'<br>');
     document.getElementById('result-evidence').innerHTML=r.evidence.replace(/\n/g,'<br>');
     goTo('result');
