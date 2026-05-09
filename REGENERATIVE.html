@@ -202,7 +202,7 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     document.getElementById('result-summary').innerHTML=r.summary.replace(/\n/g,'<br>');
     document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong><br>'+r.insight.replace(/\n/g,'<br>');
     document.getElementById('result-action').innerHTML='<strong>'+r.action_title+'</strong><br>'+r.action.replace(/\n/g,'<br>');
-    document.getElementById('result-evidence').innerHTML=r.evidence.replace(/\n/g,'<br>');
+    document.getElementById('result-evidence').innerHTML='<strong>'+r.evidence_title+'</strong><br>'+r.evidence.replace(/\n/g,'<br>');
     goTo('result');
   } catch(e){
     // fallback
