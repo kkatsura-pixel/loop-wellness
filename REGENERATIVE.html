@@ -57,6 +57,11 @@
   .btn-primary:hover { background: rgba(90,80,60,0.06); border-color: #3a3428; color: #1a1810; }
   .btn-secondary { border: 1px solid #c8c0a8; color: #6a6250; background: transparent; padding: 14px; font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.3s; text-transform: uppercase; display: block; width: 100%; }
   .btn-secondary:hover { border-color: #7a7060; color: #5a5040; }
+  .result-scores { display: flex; justify-content: space-around; align-items: center; padding: 48px 0; border-bottom: 1px solid #ddd8cc; margin-bottom: 40px; }
+  .score-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .score-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #a09880; text-transform: uppercase; }
+  .score-ring { width: 70px; height: 70px; }
+  .score-number { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #3a3428; letter-spacing: 0.1em; }
 </style>
 
 <div id="app">
@@ -122,6 +127,7 @@
     <div class="result-title-line"></div>
     <p class="result-cond-label">あなたの現在のコンディション</p>
     <p id="result-summary" class="result-summary"></p>
+    <div class="result-scores"><div class="score-item"><p class="score-label">Energy</p><svg class="score-ring" viewBox="0 0 70 70"><circle cx="35" cy="35" r="28" fill="none" stroke="#e8e2d4" stroke-width="0.8"/><circle id="ring-energy" cx="35" cy="35" r="28" fill="none" stroke="#5a5040" stroke-width="0.8" stroke-dasharray="0 176" transform="rotate(-90 35 35)"/></svg><p class="score-number" id="num-energy">—</p></div><div class="score-item"><p class="score-label">Mind</p><svg class="score-ring" viewBox="0 0 70 70"><circle cx="35" cy="35" r="28" fill="none" stroke="#e8e2d4" stroke-width="0.8"/><circle id="ring-mind" cx="35" cy="35" r="28" fill="none" stroke="#5a5040" stroke-width="0.8" stroke-dasharray="0 176" transform="rotate(-90 35 35)"/></svg><p class="score-number" id="num-mind">—</p></div><div class="score-item"><p class="score-label">Flow</p><svg class="score-ring" viewBox="0 0 70 70"><circle cx="35" cy="35" r="28" fill="none" stroke="#e8e2d4" stroke-width="0.8"/><circle id="ring-flow" cx="35" cy="35" r="28" fill="none" stroke="#5a5040" stroke-width="0.8" stroke-dasharray="0 176" transform="rotate(-90 35 35)"/></svg><p class="score-number" id="num-flow">—</p></div></div>
     <div class="result-block"><p class="result-block-label">Insight</p><p id="result-insight" class="result-block-body"></p></div>
     <div class="result-block"><p class="result-block-label">Action</p><p id="result-action" class="result-block-body"></p></div>
     <div class="result-evidence-wrap"><p class="result-evidence-label">Evidence</p><p id="result-evidence" class="result-evidence-body"></p></div>
@@ -187,7 +193,7 @@ function goToResult(){
   generateResult();
 }
 async function generateResult(){
-var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回必ず異なる視点・異なる具体例・異なるアドバイスでインサイトを生成してください。同じ内容の繰り返しは厳禁です。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で端的に表現（改行は\\nで）",\n  "insight_title": "INSIGHTの見出し。具体的な栄養素名・ホルモン名・身体部位名を必ず含む1行（例：コルチゾールが脂肪燃焼を妨げています）",\n  "insight": "なぜその状態かの説明。2〜3行",\n  "action_title": "ACTIONの見出し。具体的な食材名・種目名・数値を必ず含む1行（例：就寝前にビタミンC500mgで回復を促す）",\n  "action": "今日からできる具体的な行動。2〜3行",\n  "evidence_title": "EVIDENCEの見出し。研究名や栄養素名を含む1行（例：オメガ3脂肪酸が筋肉修復を促進する）",\n  "evidence": "医科学的根拠。2〜3行"\n}\n\n重要: 静かで余白のある品のある文体で。毎回必ず異なる角度・異なる具体例で生成すること。actionには栄養素・食材だけでなく、エクササイズ・ストレッチ・ウォーキング・有酸素運動・ピラティス・トレーニングなど運動系のアドバイスも必ず含めること。毎回異なるカテゴリ（栄養・運動・睡眠・呼吸・マインドフルネスなど）からランダムに選ぶこと。**などのマークダウン記号は絶対に使わないこと。';
+var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回必ず異なる視点・異なる具体例・異なるアドバイスでインサイトを生成してください。同じ内容の繰り返しは厳禁です。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で端的に表現（改行は\\nで）",\n  "insight_title": "INSIGHTの見出し。具体的な栄養素名・ホルモン名・身体部位名を必ず含む1行（例：コルチゾールが脂肪燃焼を妨げています）",\n  "insight": "なぜその状態かの説明。2〜3行",\n  "action_title": "ACTIONの見出し。具体的な食材名・種目名・数値を必ず含む1行（例：就寝前にビタミンC500mgで回復を促す）",\n  "action": "今日からできる具体的な行動。2〜3行",\n  "evidence_title": "EVIDENCEの見出し。研究名や栄養素名を含む1行（例：オメガ3脂肪酸が筋肉修復を促進する）",\n  "evidence": "医科学的根拠。2〜3行"\n}\n\n重要: 静かで余白のある品のある文体で。毎回必ず異なる角度・異なる具体例で生成すること。actionには栄養素・食材だけでなく、エクササイズ・ストレッチ・ウォーキング・有酸素運動・ピラティス・トレーニングなど運動系のアドバイスも必ず含めること。毎回異なるカテゴリ（栄養・運動・睡眠・呼吸・マインドフルネスなど）からランダムに選ぶこと。"energy": エネルギースコア（0〜100の整数）,"mind": マインドスコア（0〜100の整数）,"flow": フロースコア（0〜100の整数）,**などのマークダウン記号は絶対に使わないこと。';
 
   try {
     var resp = await fetch('https://loop-gemini-proxy.koshiro-katsura.workers.dev',{
@@ -202,6 +208,7 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     text = text.replace(/```json|```/g,'').trim();
     var r = JSON.parse(text);
     document.getElementById('result-summary').innerHTML=r.summary;
+    var circ=2*Math.PI*28;document.getElementById('num-energy').textContent=r.energy;document.getElementById('ring-energy').setAttribute('stroke-dasharray',(circ*r.energy/100)+' '+circ);document.getElementById('num-mind').textContent=r.mind;document.getElementById('ring-mind').setAttribute('stroke-dasharray',(circ*r.mind/100)+' '+circ);document.getElementById('num-flow').textContent=r.flow;document.getElementById('ring-flow').setAttribute('stroke-dasharray',(circ*r.flow/100)+' '+circ);
     document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong>'+r.insight;
     document.getElementById('result-action').innerHTML='<strong>'+r.action_title+'</strong>'+r.action;
     document.getElementById('result-evidence').innerHTML='<strong>'+r.evidence_title+'</strong>'+r.evidence;
