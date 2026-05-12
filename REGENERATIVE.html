@@ -176,8 +176,8 @@ function buildQ3(){
   document.getElementById('q3-title').textContent=d.title;
   var c=document.getElementById('q3-options');
   c.innerHTML='';
-  var btn=document.getElementById('btn-q3-next');
-  btn.style.opacity='0.3';btn.style.pointerEvents='none';
+
+  
   state.q3=null;
   d.opts.forEach(function(opt){
     var el=document.createElement('button');
