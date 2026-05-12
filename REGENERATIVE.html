@@ -168,7 +168,7 @@ function selectQ(q,val,el){
   el.classList.add('selected');
   var btn=document.getElementById('btn-'+q+'-next');
   if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';}
-}
+setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goToResult();},400);}
 
 function buildQ3(){
   var d=q3Map[state.q1];
