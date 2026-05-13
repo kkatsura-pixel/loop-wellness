@@ -131,6 +131,7 @@
     <div class="result-block"><p class="result-block-label">Insight</p><p id="result-insight" class="result-block-body"></p></div>
     <div class="result-block"><p class="result-block-label">Action</p><p id="result-action" class="result-block-body"></p></div>
     <div class="result-evidence-wrap"><p class="result-evidence-label">Evidence</p><p id="result-evidence" class="result-evidence-body"></p></div>
+    <div class="result-block"><p class="result-block-label">Recipe</p><p id="result-recipe" class="result-block-body"></p></div>
     <p class="result-closing">「整える」小さな一歩から</p>
     <div class="result-btns">
       <a class="btn-primary" href="https://lin.ee/tClBpeN" target="_blank" style="text-decoration:none;display:block;text-align:center;">Next Action</a>
@@ -193,7 +194,7 @@ function goToResult(){
   generateResult();
 }
 async function generateResult(){
-var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回必ず異なる視点・異なる具体例・異なるアドバイスでインサイトを生成してください。同じ内容の繰り返しは厳禁です。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で端的に表現（改行は\\nで）",\n  "insight_title": "INSIGHTの見出し。「気づき・発見」のトーンで余韻を残す1行。具体的な栄養素名・ホルモン名・身体部位名を必ず含む。断定せず静かに問いかける文体で（例：眠りの浅さが、肌の再生サイクルを乱している）",\n  "insight": "なぜその状態かの説明。2〜3行",\n  "action_title": "ACTIONの見出し。行動とベネフィットをセットで簡潔に1行。具体的な種目名・食材名・数値を必ず含む。背中を押す簡潔な文体で（例：週3回のプランクで、体幹と代謝を同時に整える）",\n  "action": "今日からできる具体的な行動。2〜3行",\n  "evidence_title": "EVIDENCEの見出し。研究名や栄養素名を含む1行（例：オメガ3脂肪酸が筋肉修復を促進する）",\n  "evidence": "医科学的根拠。2〜3行,\n  "energy": エネルギースコア（0〜100の整数）,\n  "mind": マインドスコア（0〜100の整数）,\n  "flow": フロースコア（0〜100の整数）"\n}\n\n重要: 静かで余白のある品のある文体で。毎回必ず異なる角度・異なる具体例で生成すること。actionには栄養素・食材だけでなく、エクササイズ・ストレッチ・ウォーキング・有酸素運動・ピラティス・トレーニングなど運動系のアドバイスも必ず含めること。毎回異なるカテゴリ（栄養・運動・睡眠・呼吸・マインドフルネスなど）からランダムに選ぶこと。"energy": エネルギースコア（0〜100の整数）,"mind": マインドスコア（0〜100の整数）,"flow": フロースコア（0〜100の整数）,**などのマークダウン記号は絶対に使わないこと。';
+var prompt = 'あなたはウェルネスコーチです。以下のコンディションチェック結果をもとに、毎回必ず異なる視点・異なる具体例・異なるアドバイスでインサイトを生成してください。同じ内容の繰り返しは厳禁です。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n\n以下のJSON形式のみで返答してください（他の文言不要）:\n{\n  "summary": "現在のコンディションを2行で端的に表現（改行は\\nで）",\n  "insight_title": "INSIGHTの見出し。「気づき・発見」のトーンで余韻を残す1行。具体的な栄養素名・ホルモン名・身体部位名を必ず含む。断定せず静かに問いかける文体で（例：眠りの浅さが、肌の再生サイクルを乱している）",\n  "insight": "なぜその状態かの説明。2〜3行",\n  "action_title": "ACTIONの見出し。行動とベネフィットをセットで簡潔に1行。具体的な種目名・食材名・数値を必ず含む。背中を押す簡潔な文体で（例：週3回のプランクで、体幹と代謝を同時に整える）",\n  "action": "今日からできる具体的な行動。2〜3行",\n  "evidence_title": "EVIDENCEの見出し。研究名や栄養素名を含む1行（例：オメガ3脂肪酸が筋肉修復を促進する）",\n  "evidence": "医科学的根拠。2〜3行,\n  "energy": エネルギースコア（0〜100の整数）,\n  "mind": マインドスコア（0〜100の整数）,\n  "flow": フロースコア（0〜100の整数）"\n}\n\n重要: 静かで余白のある品のある文体で。毎回必ず異なる角度・異なる具体例で生成すること。actionには栄養素・食材だけでなく、エクササイズ・ストレッチ・ウォーキング・有酸素運動・ピラティス・トレーニングなど運動系のアドバイスも必ず含めること。毎回異なるカテゴリ（栄養・運動・睡眠・呼吸・マインドフルネスなど）からランダムに選ぶこと。"energy": エネルギースコア（0〜100の整数）,"mind": マインドスコア（0〜100の整数）,"flow": フロースコア（0〜100の整数）,**などのマークダウン記号は絶対に使わないこと。,"recipe_title": "ベネフィットを冒頭に含むレシピ名（例：肌を修復するアボカドとサーモンのマリネ）","recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む","recipe_type": "料理・スムージー・ドリンク・スープのいずれか","season": "現在の季節","timing": "朝・昼・夜・就寝前のいずれか","ingredients": "材料（5品目以内・分量付き・改行は\\nで）","steps": "手順（3ステップ以内・改行は\\nで）","note": "食べ方・飲み方の一言アドバイスをベネフィットを添えて"';
 
   try {
     var resp = await fetch('https://loop-gemini-proxy.koshiro-katsura.workers.dev',{
@@ -212,6 +213,7 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong>'+r.insight;
     document.getElementById('result-action').innerHTML='<strong>'+r.action_title+'</strong>'+r.action;
     document.getElementById('result-evidence').innerHTML='<strong>'+r.evidence_title+'</strong>'+r.evidence;
+    document.getElementById('result-recipe').innerHTML='<strong>'+r.recipe_title+'</strong><br>'+r.recipe_concept+'<br><br>'+r.ingredients.replace(/\\n/g,'<br>')+'<br><br>'+r.steps.replace(/\\n/g,'<br>')+'<br><br>'+r.note;
     goTo('result');
   } catch(e){
     // fallback
