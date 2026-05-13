@@ -213,7 +213,7 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     document.getElementById('result-insight').innerHTML='<strong>'+r.insight_title+'</strong>'+r.insight;
     document.getElementById('result-action').innerHTML='<strong>'+r.action_title+'</strong>'+r.action;
     document.getElementById('result-evidence').innerHTML='<strong>'+r.evidence_title+'</strong>'+r.evidence;
-    document.getElementById('result-recipe').innerHTML='<p class="result-evidence-label">Recipe</p><strong>'+r.recipe_title+'</strong>'+r.recipe_concept+'<br><span style="font-size:9px;letter-spacing:0.2em;color:#3a3428;text-transform:uppercase;display:block;margin-top:4px;">— 材料</span><span style="display:block;margin-top:8px;">'+r.ingredients.replace(/\\n/g,'<br>')+'</span><span style="font-size:9px;letter-spacing:0.2em;color:#3a3428;text-transform:uppercase;display:block;margin-top:12px;">— 作り方</span><span style="display:block;margin-top:8px;">'+r.steps.replace(/\\n/g,'<br>')+'</span><br><em style="font-size:11px;color:#6a6250;">'+r.note+'</em>';
+    document.getElementById('result-recipe').innerHTML='<p class="result-evidence-label">Recipe</p><strong>'+r.recipe_title+'</strong>'+r.recipe_concept+'<br><br><span style="font-size:9px;letter-spacing:0.2em;color:#3a3428;text-transform:uppercase;display:block;">— 材料</span><span style="display:block;margin-top:8px;">'+r.ingredients.replace(/\\n/g,'<br>')+'</span><span style="font-size:9px;letter-spacing:0.2em;color:#3a3428;text-transform:uppercase;display:block;margin-top:12px;">— 作り方</span><span style="display:block;margin-top:8px;">'+r.steps.replace(/\\n/g,'<br>')+'</span><br><em style="font-size:11px;color:#6a6250;">'+r.note+'</em>';
     goTo('result');
   } catch(e){
     // fallback
