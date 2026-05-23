@@ -1,20 +1,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@200;300&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  #app { font-family: 'Noto Serif JP', serif; font-weight: 300; background: #f8f5f0; min-height: 100vh; color: #2c2820; letter-spacing: 0.05em; }
+  #app { font-family: 'Noto Serif JP', serif; font-weight: 300; background: #f8f5f0; min-height: 100vh; color: #1a1610; letter-spacing: 0.05em; }
   #app::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('IMG_0952.png') no-repeat center top / cover; opacity: 0.35; z-index: 0; pointer-events: none; }
   .screen { display: none; flex-direction: column; min-height: 100vh; position: relative; z-index: 1; }
   .screen.active { display: flex; }
   #screen-top { background: transparent; align-items: center; justify-content: center; text-align: center; padding: 56px 40px; gap: 0; }
   .top-logo-wrap { margin-bottom: 20px; }
   .top-logo { width: 200px; height: 200px; object-fit: contain; opacity: 0.88; }
-  .brand { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.4em; color: #7a7060; margin-bottom: 24px; font-weight: 300; text-transform: uppercase; }
-  .top-regen { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; letter-spacing: 0.22em; color: #3a3428; margin-bottom: 20px; line-height: 1; }
+ .brand { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.4em; color: #5a5048; margin-bottom: 24px; font-weight: 300; text-transform: uppercase; }
+  .top-regen { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; letter-spacing: 0.22em; color: #2a2418; margin-bottom: 20px; line-height: 1; }
   .top-divider-line { width: 36px; height: 1px; background: #c8c0a8; margin: 0 auto 20px; }
-  .top-jissei { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 200; letter-spacing: 0.5em; color: #6a6250; margin-bottom: 32px; }
-  .top-catchcopy { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 200; line-height: 2.8; color: #5a5040; letter-spacing: 0.12em; margin-bottom: 48px; }
-  .btn-start { border: 1px solid #9a9280; color: #5a5040; background: transparent; padding: 15px 48px; font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.4s; display: inline-block; }
-  .btn-start:hover { border-color: #5a5040; color: #2c2820; }
+  .top-jissei { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 200; letter-spacing: 0.5em; color: #4a4238; margin-bottom: 32px; }
+  .top-catchcopy { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 200; line-height: 2.8; color: #3a3028; letter-spacing: 0.12em; margin-bottom: 48px; }
+  .btn-start { border: 1px solid #9a9280; color: #3a3028; background: transparent; padding: 15px 48px; font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.4s; display: inline-block; }
+  .btn-start:hover { border-color: #3a3028; color: #1a1610; }
   #screen-concept { background: transparent; align-items: center; justify-content: center; padding: 80px 40px; gap: 0; }
   .concept-line { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 200; line-height: 1; color: #3a3428; letter-spacing: 0.14em; padding: 22px 0; border-bottom: 1px solid #ddd8cc; opacity: 0; transform: translateY(8px); transition: all 0.65s ease; text-align: center; width: 100%; }
   .concept-line:first-child { border-top: 1px solid #ddd8cc; }
@@ -23,45 +23,45 @@
   .btn-ghost { border: 1px solid #b0a890; color: #5a5040; background: transparent; padding: 13px 36px; font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.25em; cursor: pointer; font-weight: 300; transition: all 0.3s; display: inline-block; }
   .btn-ghost:hover { border-color: #5a5040; color: #2c2820; }
   .q-screen { background: transparent; padding: 52px 36px 40px; flex: 1; flex-direction: column; }
-  .q-step { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 0.3em; color: #b0a890; margin-bottom: 32px; text-transform: uppercase; }
-  .q-title { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 200; color: #3a3428; letter-spacing: 0.1em; margin-bottom: 40px; line-height: 2.0; }
+  .q-step { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 0.3em; color: #7a7268; margin-bottom: 32px; text-transform: uppercase; }
+  .q-title { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 200; color: #2a2418; letter-spacing: 0.1em; margin-bottom: 40px; line-height: 2.0; }
   .q-options { display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .q-option { border: 1px solid #ddd8cc; background: #faf8f4; padding: 17px 20px; cursor: pointer; text-align: left; transition: all 0.25s; display: flex; flex-direction: column; gap: 5px; }
   .q-option:hover { border-color: #9a9280; background: #f4f0e8; }
-  .q-option.selected { border-color: #5a5040; background: #e8e2d4; box-shadow: inset 4px 0 0 #5a5040; }
-  .q-option.selected .opt-main { color: #2c2820; font-weight: 400; }
-  .q-option.selected .opt-sub { color: #6a6050; }
-  .opt-main { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 300; color: #4a4438; letter-spacing: 0.08em; transition: all 0.25s; }
-  .opt-sub { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 200; color: #6a6250; letter-spacing: 0.04em; }
+  .q-option.selected { border-color: #3a3028; background: #e8e2d4; box-shadow: inset 4px 0 0 #3a3028; }
+  .q-option.selected .opt-main { color: #1a1610; font-weight: 400; }
+  .q-option.selected .opt-sub { color: #4a4238; }
+  .opt-main { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 300; color: #3a3428; letter-spacing: 0.08em; transition: all 0.25s; }
+  .opt-sub { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 200; color: #4a4238; letter-spacing: 0.04em; }
   .q-nav { margin-top: 32px; text-align: right; }
   #screen-loading { background: transparent; align-items: center; justify-content: center; flex-direction: column; gap: 24px; }
-  .loading-mark { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: #8a7f70; letter-spacing: 0.2em; animation: pulse 2s ease-in-out infinite; }
-  .loading-text { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 200; color: #a09880; letter-spacing: 0.2em; }
+  .loading-mark { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: #6a6258; letter-spacing: 0.2em; animation: pulse 2s ease-in-out infinite; }
+  .loading-text { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 200; color: #6a6258; letter-spacing: 0.2em; }
   @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
   #screen-result { background: transparent; padding: 52px 36px 48px; flex: 1; flex-direction: column; }
-  .result-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; letter-spacing: 0.3em; color: #3a3428; margin-bottom: 10px; text-transform: uppercase; }
+  .result-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; letter-spacing: 0.3em; color: #2a2418; margin-bottom: 10px; text-transform: uppercase; }
   .result-title-line { width: 32px; height: 1px; background: #c8c0a8; margin-bottom: 36px; }
-  .result-cond-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.3em; color: #6a6250; margin-bottom: 12px; text-transform: uppercase; }
-  .result-summary { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 200; line-height: 1.8; color: #2c2820; margin-bottom: 40px; letter-spacing: 0.08em; padding-bottom: 36px; border-bottom: 1px solid #ddd8cc; }
+  .result-cond-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.3em; color: #4a4238; margin-bottom: 12px; text-transform: uppercase; }
+  .result-summary { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 200; line-height: 1.8; color: #1a1610; margin-bottom: 40px; letter-spacing: 0.08em; padding-bottom: 36px; border-bottom: 1px solid #ddd8cc; }
   .result-block { margin-bottom: 32px; }
-  .result-block-label { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.35em; color: #3a3428; margin-bottom: 12px; margin-top: 40px; text-transform: uppercase; border-left: 3px solid #5a5040; padding-left: 10px; }
-  .result-block-body { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 200; line-height: 2.4; color: #4a4438; letter-spacing: 0.07em; }
+  .result-block-label { font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 0.35em; color: #2a2418; margin-bottom: 12px; margin-top: 40px; text-transform: uppercase; border-left: 3px solid #3a3028; padding-left: 10px; }
+  .result-block-body { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 200; line-height: 2.4; color: #3a3428; letter-spacing: 0.07em; }
   .result-block-body strong { display: block; margin-top: 16px; margin-bottom: 15px; }
   .result-evidence-wrap { margin-top: 24px; margin-bottom: 36px; padding: 20px 20px 20px 24px; border-left: 2px solid #c8c0a8; background: #ebe7de; }
-  .result-evidence-label { font-family: 'Cormorant Garamond', serif; font-size: 9px; letter-spacing: 0.35em; color: #3a3428; margin-bottom: 10px; text-transform: uppercase; }
-  .result-evidence-body { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 200; line-height: 2.2; color: #3a3428; letter-spacing: 0.04em; }
+  .result-evidence-label { font-family: 'Cormorant Garamond', serif; font-size: 9px; letter-spacing: 0.35em; color: #2a2418; margin-bottom: 10px; text-transform: uppercase; }
+  .result-evidence-body { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 200; line-height: 2.2; color: #2a2418; letter-spacing: 0.04em; }
   .result-evidence-body strong { display: block; margin-bottom: 8px; }
-  .result-closing { font-family: 'Noto Serif JP', serif; font-size: 13px; font-weight: 200; color: #6a6250; letter-spacing: 0.18em; margin-bottom: 80px; text-align: center; }
+  .result-closing { font-family: 'Noto Serif JP', serif; font-size: 13px; font-weight: 200; color: #4a4238; letter-spacing: 0.18em; margin-bottom: 80px; text-align: center; }
   .result-btns { display: flex; flex-direction: column; gap: 12px; }
-  .btn-primary { border: 1px solid #5a5040; color: #3a3428; background: transparent; padding: 17px; font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.35s; text-transform: uppercase; display: block; width: 100%; }
+  .btn-primary { border: 1px solid #3a3028; color: #2a2418; background: transparent; padding: 17px; font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.35s; text-transform: uppercase; display: block; width: 100%; }
   .btn-primary:hover { background: rgba(90,80,60,0.06); border-color: #3a3428; color: #1a1810; }
-  .btn-secondary { border: 1px solid #c8c0a8; color: #6a6250; background: transparent; padding: 14px; font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.3s; text-transform: uppercase; display: block; width: 100%; }
-  .btn-secondary:hover { border-color: #7a7060; color: #5a5040; }
+  .btn-secondary { border: 1px solid #c8c0a8; color: #4a4238; background: transparent; padding: 14px; font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: 0.3em; cursor: pointer; font-weight: 300; transition: all 0.3s; text-transform: uppercase; display: block; width: 100%; }
+  .btn-secondary:hover { border-color: #5a5048; color: #3a3028; }
   .result-scores { display: flex; justify-content: space-around; align-items: center; padding: 48px 0; border-bottom: 1px solid #ddd8cc; margin-bottom: 40px; }
   .score-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .score-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #3a3428; text-transform: uppercase; }
+  .score-label { font-family: 'Cormorant Garamond', serif; font-size: 10px; letter-spacing: 0.35em; color: #2a2418; text-transform: uppercase; }
   .score-ring { width: 70px; height: 70px; }
-  .score-number { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #3a3428; letter-spacing: 0.1em; }
+  .score-number { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #2a2418; letter-spacing: 0.1em; }
 </style>
 
 <div id="app">
