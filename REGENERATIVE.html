@@ -74,20 +74,11 @@
     <div class="top-divider-line"></div>
     <p class="top-jissei">ー 自己再生 ー</p>
     <p class="top-catchcopy">ココロとカラダの今を知り<br>日々を整える</p>
-    <button class="btn-start" onclick="goTo('concept')">Check Start →</button>
-  </div>
-
-  <div id="screen-concept" class="screen">
-    <div style="text-align:center;width:100%">
-      <div class="concept-line">「知る」から始まる、丁寧な暮らし</div>
-      <div class="concept-line">「整える」から始まる、心身の余白</div>
-      <div class="concept-line">「繋がる」から拡がる、豊かな人生</div>
-    </div>
-    <div class="concept-btn-wrap"><button class="btn-ghost" onclick="goTo('q1')">次へ →</button></div>
+    <button class="btn-start" onclick="goTo('q1')">Check Start →</button>
   </div>
 
   <div id="screen-q1" class="screen q-screen">
-    <p class="q-step">Q1 / 4</p>
+    <p class="q-step">Q1 / 5</p>
     <p class="q-title">今、優先したいテーマは？</p>
     <div class="q-options">
       <button class="q-option" onclick="selectQ('q1','姿勢・コンディション',this)"><span class="opt-main">姿勢・コンディション</span><span class="opt-sub">バランスを整える</span></button>
@@ -99,7 +90,7 @@
   </div>
 
   <div id="screen-q2" class="screen q-screen">
-    <p class="q-step">Q2 / 4</p>
+    <p class="q-step">Q2 / 5</p>
     <p class="q-title">最近のコンディションに近いものは？</p>
     <div class="q-options">
       <button class="q-option" onclick="selectQ('q2','良好・安定している',this)"><span class="opt-main">良好</span><span class="opt-sub">安定している</span></button>
@@ -111,12 +102,32 @@
   </div>
 
   <div id="screen-q3" class="screen q-screen">
-    <p class="q-step">Q3 / 4</p>
+    <p class="q-step">Q3 / 5</p>
     <p id="q3-title" class="q-title"></p>
     <div class="q-options" id="q3-options"></div>
     
   </div>
+<div id="screen-q4" class="screen q-screen">
+    <p class="q-step">Q4 / 5</p>
+    <p class="q-title">最近の生活習慣に近いものは？</p>
+    <div class="q-options">
+      <button class="q-option" onclick="selectQ('q4','睡眠・食事・運動、整っている',this)"><span class="opt-main">睡眠・食事・運動、整っている</span><span class="opt-sub">バランスのとれた毎日を送れている</span></button>
+      <button class="q-option" onclick="selectQ('q4','睡眠か食事が乱れている',this)"><span class="opt-main">睡眠か食事が乱れている</span><span class="opt-sub">どちらかが後回しになりがち</span></button>
+      <button class="q-option" onclick="selectQ('q4','食事か運動が不十分',this)"><span class="opt-main">食事か運動が不十分</span><span class="opt-sub">栄養か活動量が足りていない感覚</span></button>
+      <button class="q-option" onclick="selectQ('q4','睡眠・食事・運動、全て不安定',this)"><span class="opt-main">睡眠・食事・運動、全て不安定</span><span class="opt-sub">生活全体が崩れている状態</span></button>
+    </div>
+  </div>
 
+  <div id="screen-q5" class="screen q-screen">
+    <p class="q-step">Q5 / 5</p>
+    <p class="q-title">自分のための時間、取れていますか？</p>
+    <div class="q-options">
+      <button class="q-option" onclick="selectQ('q5','十分取れている',this)"><span class="opt-main">十分取れている</span><span class="opt-sub">余白のある日々を送れている</span></button>
+      <button class="q-option" onclick="selectQ('q5','少し足りない',this)"><span class="opt-main">少し足りない</span><span class="opt-sub">もう少し自分時間がほしい</span></button>
+      <button class="q-option" onclick="selectQ('q5','ほとんど取れていない',this)"><span class="opt-main">ほとんど取れていない</span><span class="opt-sub">他のことで精一杯な状態</span></button>
+      <button class="q-option" onclick="selectQ('q5','意識したことがなかった',this)"><span class="opt-main">意識したことがなかった</span><span class="opt-sub">自分時間という概念がなかった</span></button>
+    </div>
+  </div>
   <div id="screen-loading" class="screen">
     <p class="loading-mark">∿</p>
     <p class="loading-text">コンディションを読み取っています</p>
@@ -141,7 +152,7 @@
 </div>
 
 <script>
-var state={q1:null,q2:null,q3:null};
+var state={q1:null,q2:null,q3:null,q4:null,q5:null};
 var q3Map={
   '姿勢・コンディション':{title:'どの部位に意識を向けますか？',opts:[{v:'首・頭まわり（こりや重さ）',m:'首・頭まわり',s:'こりや重さを感じる'},{v:'肩・肩甲骨（緊張や動かしにくさ）',m:'肩・肩甲骨',s:'緊張や動かしにくさ'},{v:'腰まわり（張りや違和感）',m:'腰まわり',s:'張りや違和感'},{v:'姿勢バランス（背中・骨盤）',m:'姿勢バランス',s:'背中・骨盤の整い'}]},
   'ビューティー':{title:'どの変化に意識を向けますか？',opts:[{v:'肌（乾燥・くすみ・ハリ・ツヤ）',m:'肌',s:'乾燥・くすみ・ハリ・ツヤ'},{v:'フェイスライン（印象・輪郭）',m:'フェイスライン',s:'印象・輪郭'},{v:'むくみ（巡り・すっきり感）',m:'むくみ',s:'巡り・すっきり感'},{v:'内側のバランス（栄養・コンディション）',m:'内側のバランス',s:'栄養・コンディション'}]},
@@ -152,13 +163,6 @@ var q3Map={
 function goTo(s){
   document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});
   document.getElementById('screen-'+s).classList.add('active');
-  if(s==='concept'){
-    setTimeout(function(){
-      document.querySelectorAll('.concept-line').forEach(function(l,i){
-        setTimeout(function(){l.classList.add('show');},i*300);
-      });
-    },100);
-  }
   if(s==='q3')buildQ3();
 }
 
@@ -169,7 +173,7 @@ function selectQ(q,val,el){
   el.classList.add('selected');
   var btn=document.getElementById('btn-'+q+'-next');
   if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';}
-setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goToResult();},400);}
+setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goTo('q4');else if(q==='q4')goTo('q5');else if(q==='q5')goToResult();},400);}
 
 function buildQ3(){
   var d=q3Map[state.q1];
@@ -226,13 +230,8 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
 }
 
 function recheck(){
-  state={q1:null,q2:null,q3:null};
+  state={q1:null,q2:null,q3:null,q4:null,q5:null};
   document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected');});
-  ['btn-q1-next','btn-q2-next','btn-q3-next'].forEach(function(id){
-    var btn=document.getElementById(id);
-    if(btn){btn.style.opacity='0.3';btn.style.pointerEvents='none';}
-  });
-  document.querySelectorAll('.concept-line').forEach(function(l){l.classList.remove('show');});
   goTo('top');
 }
 </script>
