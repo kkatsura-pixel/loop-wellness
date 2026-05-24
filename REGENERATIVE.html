@@ -213,7 +213,7 @@ var prompt = 'あなたはウェルネスコーチです。以下のコンディ
     var text = data.candidates[0].content.parts.map(function(i){return i.text||'';}).join('');
     text = text.replace(/```json|```/g,'').trim();
     var r = JSON.parse(text);
-    document.getElementById('result-summary').innerHTML=r.summary;
+    document.getElementById('result-sensory').textContent=r.sensory;['block-sensory','block-insight','block-evidence','block-action','block-recipe'].forEach(function(id){var el=document.getElementById(id);if(el){setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},300);}});
     var circ=2*Math.PI*28;document.getElementById('num-energy').textContent=r.energy;document.getElementById('ring-energy').setAttribute('stroke-dasharray',(circ*r.energy/100)+' '+circ);document.getElementById('num-mind').textContent=r.mind;document.getElementById('ring-mind').setAttribute('stroke-dasharray',(circ*r.mind/100)+' '+circ);document.getElementById('num-flow').textContent=r.flow;document.getElementById('ring-flow').setAttribute('stroke-dasharray',(circ*r.flow/100)+' '+circ);
     document.getElementById('result-insight-title').textContent=r.insight_title;document.getElementById('result-insight').textContent=r.insight;
     document.getElementById('result-action-title').textContent=r.action_title;document.getElementById('result-action').textContent=r.action;
