@@ -39,7 +39,7 @@
   .loading-text { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 200; color: #6a6258; letter-spacing: 0.2em; }
   @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
   @keyframes bgFloat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.03);} }
-  @keyframes ringGlow { 0%,100%{filter:drop-shadow(0 0 0px rgba(168,133,90,0));} 50%{filter:drop-shadow(0 0 6px rgba(168,133,90,0.4));} }
+  @keyframes ringGlow { 0%,100%{filter:drop-shadow(0 0 0px rgba(168,133,90,0));-webkit-filter:drop-shadow(0 0 0px rgba(168,133,90,0));} 50%{filter:drop-shadow(0 0 6px rgba(168,133,90,0.4));-webkit-filter:drop-shadow(0 0 6px rgba(168,133,90,0.4));} }
   #screen-result { background: transparent; padding: 52px 36px 48px; flex: 1; flex-direction: column; }
   .result-brand { font-family: 'Cormorant Garamond', serif; font-size: 27px; font-weight: 700; letter-spacing: 0.3em; color: #2a2418; margin-bottom: 10px; text-transform: uppercase; }
   .result-title-line { width: 32px; height: 1px; background: #c8c0a8; margin-bottom: 36px; }
