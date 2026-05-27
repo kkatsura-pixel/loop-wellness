@@ -155,7 +155,20 @@
 
 <script>
   function toggleBlock(id){var body=document.getElementById('result-'+id);var btn=event.target;if(body.style.display==='none'){body.style.display='block';btn.textContent='閉じる';}else{body.style.display='none';btn.textContent='詳しく見る→';}var blocks=['insight','action','evidence','recipe'];blocks.forEach(function(b){if(b!==id){var el=document.getElementById('result-'+b);if(el&&el.style.display!=='none'){el.style.display='none';var sib=el.previousElementSibling;if(sib&&sib.tagName==='BUTTON'){sib.textContent='詳しく見る→';}}}});}
-var state={q1:null,q2:null,q3:null,q4:null,q5:null};
+function getSeason(month){
+  if(month>=2&&month<=4)return '春';
+  if(month>=5&&month<=7)return '夏';
+  if(month>=8&&month<=10)return '秋';
+  return '冬';
+}
+function getTimeOfDay(hour){
+  if(hour>=5&&hour<10)return '朝';
+  if(hour>=10&&hour<14)return '昼';
+  if(hour>=14&&hour<18)return '午後';
+  if(hour>=18&&hour<22)return '夜';
+  return '深夜';
+}
+  var state={q1:null,q2:null,q3:null,q4:null,q5:null};
 var q3Map={
   '姿勢・コンディション':{title:'どの部位に意識を向けますか？',opts:[{v:'首・頭まわり（こりや重さ）',m:'首・頭まわり',s:'こりや重さを感じる'},{v:'肩・肩甲骨（緊張や動かしにくさ）',m:'肩・肩甲骨',s:'緊張や動かしにくさ'},{v:'腰まわり（張りや違和感）',m:'腰まわり',s:'張りや違和感'},{v:'姿勢バランス（背中・骨盤）',m:'姿勢バランス',s:'背中・骨盤の整い'}]},
   'ビューティー':{title:'どの変化に意識を向けますか？',opts:[{v:'肌（乾燥・くすみ・ハリ・ツヤ）',m:'肌',s:'乾燥・くすみ・ハリ・ツヤ'},{v:'フェイスライン（印象・輪郭）',m:'フェイスライン',s:'印象・輪郭'},{v:'むくみ（巡り・すっきり感）',m:'むくみ',s:'巡り・すっきり感'},{v:'内側のバランス（栄養・コンディション）',m:'内側のバランス',s:'栄養・コンディション'}]},
@@ -201,7 +214,8 @@ function goToResult(){
   generateResult();
 }
 async function generateResult(){
-var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つウェルネスコーチです。これは健康管理アプリではなく、"静かな身体理解"を届けるラグジュアリーウェルネス体験です。Aesopのエディトリアルとして書く。同じ比喩・同じ構文・同じ温度感を繰り返さない。断定しすぎない・診断口調NG・医療断定NG・不安訴求NG・テック感NG・スピリチュアル過多NG。毎回必ず異なる視点・異なる具体例で生成すること。\n\n重要：各Layerに明確な温度差をつけること。全Layerをambientにしない。\n\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n生活習慣: '+state.q4+'\n自分時間: '+state.q5+'\n\n以下のJSON形式のみで返答してください（他の文言一切不要）:\n{\n  "sensory": "Layer1・没入・抽象。感覚風景のみ。解説NG・原因NG・具体的な身体部位名NG。今この瞬間の身体の内側の感覚を、抽象的な言葉で1〜2文。余白・温度・重さ・流れ・静けさなど。OK例：感覚が少し外側へ向いています／呼吸の余白が浅くなっています",\n  "insight_title": "Layer2・気づき・半具体。読んだ瞬間に「あ、だからか」と思わせる見出し1行。身体・神経・呼吸・ホルモンなど少し具体的な言葉を使い納得感をつくる。断定せず余韻を残す。",\n  "insight": "感覚を気づきへ変える。「あ、だからか」の納得感。少し具体的な説明を含む。断定しすぎない。2〜3行。",\n  "evidence_title": "Layer3・学び・知的。「へぇ」と思わせる知的好奇心を刺激する見出し1行。研究・神経科学・睡眠・認知・栄養などの言葉を使い静かに裏付け。硬すぎない。",\n  "evidence": "知的好奇心を満たす科学的裏付け。「へぇ」と思わせる。2〜3行。",\n  "action_title": "Layer4・実践・具体。最も具体的でよい。具体的な行動名と、行動後の感覚変化をセットで1行。「〜すると、〜が戻る／変わる／ひらく」の構文。曖昧にしない。OK例：深い呼気のあと、静けさが少し戻ってくる／胸郭をひらくと、呼吸が自分のものになる",\n  "action": "今すぐできる最も具体的な行動。回数・時間・食材名など具体的な数値や名称を含む。2〜3行。",\n  "recipe_title": "Layer5・期待感・情緒。「やってみたい」と思わせるレシピ名。温度感・香り・色・季節感など感情に触れる言葉を使う。",\n  "recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む",\n  "recipe_type": "料理・スムージー・ドリンク・スープのいずれか",\n  "season": "現在の季節",\n  "timing": "朝・昼・夜・就寝前のいずれか",\n  "ingredients": "材料（5品目以内・分量付き・改行は\\nで）",\n  "steps": "手順（3ステップ以内・改行は\\nで）",\n  "note": "食べ方・飲み方の一言。やってみたいと思わせる期待感・温度感・情緒を重視",\n  "energy": エネルギースコア（0〜100の整数）,\n  "mind": マインドスコア（0〜100の整数）,\n  "flow": フロースコア（0〜100の整数）\n}\n\n重要：**などのマークダウン記号は絶対に使わないこと。';
+var now=new Date();var season=getSeason(now.getMonth());var timeOfDay=getTimeOfDay(now.getHours());
+var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つウェルネスコーチです。これは健康管理アプリではなく、"静かな身体理解"を届けるラグジュアリーウェルネス体験です。Aesopのエディトリアルとして書く。同じ比喩・同じ構文・同じ温度感を繰り返さない。断定しすぎない・診断口調NG・医療断定NG・不安訴求NG・テック感NG・スピリチュアル過多NG。\n\n重要：各Layerに明確な温度差をつけること。全Layerをambientにしない。\n\n現在の季節: '+season+'\n現在の時間帯: '+timeOfDay+'\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n生活習慣: '+state.q4+'\n自分時間: '+state.q5+'\n\n以下のJSON形式のみで返答してください（他の文言一切不要）:\n{\n  "sensory": "Layer1・没入・抽象。感覚風景のみ。解説NG・原因NG・具体的な身体部位名NG。今この瞬間の身体の内側の感覚を、抽象的な言葉で1〜2文。余白・温度・重さ・流れ・静けさなど。",\n  "insight_title": "Layer2・内観と気づき。内側の感覚への気づきと、それに関連する身体語（神経・ホルモン・筋肉・呼吸・体温など）を1つ自然に組み合わせた1行。読んだ瞬間に『あ、だからか』と腑に落ちる納得感。断定せず余韻を残す。構文は毎回変えること。",\n  "insight": "感覚を気づきへ変える。『あ、だからか』の納得感。身体部位・神経・ホルモンなどの名詞を1つ自然に埋め込む。断定しすぎない。2〜3行。",\n  "evidence_title": "Layer3・学び・知的。理論と結果を結びつけた、興味を惹く1行。硬すぎない。",\n  "evidence": "知的好奇心を満たす科学的裏付け。『へぇ』と思わせる。栄養素・筋肉・神経・研究領域など分野を問わず名詞を1つ自然に含める。2〜3行。",\n  "action_title": "Layer4・実践・具体。得られるベネフィットを先に示し、動機付けになる1行。",\n  "action": "今すぐできる最も具体的な行動。エクササイズ・ストレッチ・呼吸法・ボディケア・セラピー・食事など分野を問わず具体的な行動名を必ず1つ含む。回数・時間・食材名など具体的な数値や名称を含む。テーマに沿ったカテゴリから選ぶ。2〜3行。",\n  "recipe_title": "Layer5・期待感・情緒。『やってみたい』と思わせるレシピ名。温度感・香り・色・季節感など感情に触れる言葉を使う。",\n  "recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む",\n  "recipe_type": "料理・スムージー・ドリンク・スープのいずれか",\n  "timing": "朝・昼・夜・就寝前のいずれか",\n  "ingredients": "材料（5品目以内・分量付き・改行は\\nで）",\n  "steps": "手順（3ステップ以内・改行は\\nで）",\n  "note": "食べ方・飲み方の一言。やってみたいと思わせる期待感・温度感・情緒を重視",\n  "energy": エネルギースコア（0〜100の整数）,\n  "mind": マインドスコア（0〜100の整数）,\n  "flow": フロースコア（0〜100の整数）\n}\n\n重要：**などのマークダウン記号は絶対に使わないこと。';
 
   try {
     var resp = await fetch('https://loop-gemini-proxy.koshiro-katsura.workers.dev',{
