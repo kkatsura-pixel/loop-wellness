@@ -79,7 +79,7 @@
   </div>
 
   <div id="screen-q1" class="screen q-screen">
-    <p class="q-step">Q1 / 5</p>
+    <p class="q-step">Q1 / 4</p>
     <p class="q-title">今、優先したいテーマは？</p>
     <div class="q-options">
       <button class="q-option" onclick="selectQ('q1','姿勢・コンディション',this)"><span class="opt-main">姿勢・コンディション</span><span class="opt-sub">バランスを整える</span></button>
@@ -91,7 +91,7 @@
   </div>
 
   <div id="screen-q2" class="screen q-screen">
-    <p class="q-step">Q2 / 5</p>
+    <p class="q-step">Q2 / 4</p>
     <p class="q-title">最近のコンディションに近いものは？</p>
     <div class="q-options">
       <button class="q-option" onclick="selectQ('q2','良好・安定している',this)"><span class="opt-main">良好</span><span class="opt-sub">安定している</span></button>
@@ -103,13 +103,13 @@
   </div>
 
   <div id="screen-q3" class="screen q-screen">
-    <p class="q-step">Q3 / 5</p>
+    <p class="q-step">Q3 / 4</p>
     <p id="q3-title" class="q-title"></p>
     <div class="q-options" id="q3-options"></div>
     
   </div>
 <div id="screen-q5" class="screen q-screen">
-    <p class="q-step">Q5 / 5</p>
+    <p class="q-step">Q4 / 4</p>
     <p class="q-title">自分のための時間、取れていますか？</p>
     <div class="q-options">
       <button class="q-option" onclick="selectQ('q5','十分取れている',this)"><span class="opt-main">十分取れている</span><span class="opt-sub">余白のある日々を送れている</span></button>
@@ -194,7 +194,7 @@ function selectQ(q,val,el){
   el.classList.add('selected');
   var btn=document.getElementById('btn-'+q+'-next');
   if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';}
-setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goTo('q4');else if(q==='q4')goTo('q5');else if(q==='q5')goToResult();},400);}
+setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goTo('q5');else if(q==='q5')goToResult();},400);}
 
 function buildQ3(){
   var d=q3Map[state.q1];
