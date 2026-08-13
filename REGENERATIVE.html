@@ -1,9 +1,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+  html, body { height: 100%; margin: 0; overflow: hidden; }
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+JP:wght@200;300;400&family=Noto+Sans+JP:wght@200;300&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
   #app { font-family: 'Noto Serif JP', serif; font-weight: 300; background: #faf8f5; min-height: 100vh; color: #0e0c08; letter-spacing: 0.05em; }
   #app::before { display: none; }
-  .screen { display: none; flex-direction: column; min-height: 100vh; position: relative; z-index: 1; }
+  .screen { display: none; flex-direction: column; height: 100vh; overflow-y: auto; position: relative; z-index: 1; }
   .screen.active { display: flex; }
   #screen-top { background: url('IMG_3114.png') no-repeat 44% center / 108%; filter: contrast(0.94); align-items: center; justify-content: flex-end; text-align: center; padding: 56px 40px 100px; gap: 0; }
   .top-logo-wrap { margin-bottom: 20px; }
