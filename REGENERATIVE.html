@@ -48,6 +48,18 @@
   .loading-mark { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: #2a2018; letter-spacing: 0.2em; animation: pulse 2s ease-in-out infinite; text-shadow: 0 2px 8px rgba(255,255,255,0.9), 0 2px 8px rgba(255,255,255,0.9); }
   .loading-text { font-family: 'Noto Serif JP', serif; font-size: 12px; font-weight: 600; color: #000; letter-spacing: 0.2em; text-shadow: 0 0 10px rgba(255,255,255,1), 0 0 4px rgba(255,255,255,1), 0 1px 2px rgba(255,255,255,1); }
   @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  #screen-vitalscan { background: linear-gradient(rgba(250,248,244,0.23), rgba(250,248,244,0.23)), url('IMG_3111.jpg') no-repeat center center / cover; align-items: center; justify-content: center; flex-direction: column; gap: 24px; padding: 40px 28px; }
+  .vs-title { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700; letter-spacing:0.3em; color:#000; text-transform:uppercase; text-shadow:0 0 4px rgba(255,255,255,1), 0 0 10px rgba(255,255,255,1), 0 0 16px rgba(255,255,255,0.9), 0 0 24px rgba(255,255,255,0.7); margin:0; }
+  .vs-sub { font-family:'Noto Serif JP',serif; font-size:13px; font-weight:300; color:#000; letter-spacing:0.15em; text-shadow:0 0 3px rgba(255,255,255,1), 0 0 8px rgba(255,255,255,1), 0 0 12px rgba(255,255,255,0.85); margin:-20px 0 0; }
+  .vs-ring-wrap { position:relative; width:200px; height:200px; }
+  .vs-ring-wrap > svg { position:absolute; top:0; left:0; filter:drop-shadow(0 0 3px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(255,255,255,0.9)); }
+  .vs-finger-area { position:absolute; top:50%; left:50%; width:120px; height:130px; transform:translate(-50%,-50%); cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .vs-finger-label { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:'Noto Serif JP',serif; font-size:10px; font-weight:400; color:#000; letter-spacing:0.15em; white-space:nowrap; }
+  .vs-vital-score { position:absolute; top:calc(50% - 20px); left:50%; transform:translate(-50%,-50%); font-family:'Noto Serif JP',serif; font-size:13px; font-weight:400; color:#000; letter-spacing:0.15em; white-space:nowrap; min-height:1em; }
+  .vs-finger-icon { position:absolute; top:calc(50% + 4px); left:50%; transform:translate(-50%,0); display:flex; filter:drop-shadow(0 0 3px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(255,255,255,0.9)); }
+  .vs-wave-svg { filter:drop-shadow(0 0 3px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(255,255,255,0.9)); }
+  .loading-fallback-btn { border:none; border-bottom:1px solid #a89e8c; background:rgba(250,248,244,0.94); padding:14px 40px; cursor:pointer; transition:all 0.25s; box-shadow:0 2px 10px rgba(0,0,0,0.08); backdrop-filter:blur(3px); font-family:'Noto Serif JP',serif; font-size:15px; font-weight:600; color:#000; letter-spacing:0.08em; text-align:center; display:none; }
+  .loading-fallback-btn:hover { border-color:#8a8270; background:#e8e4dc; }
   @keyframes bgBreathe { 0%,100%{opacity:0.30;} 50%{opacity:0.47;} }
   @keyframes ringGlow { 0%,100%{stroke-opacity:0.4;} 50%{stroke-opacity:1;} }
   #screen-result { background: transparent; padding: 52px 36px 48px; flex: 1; flex-direction: column; }
@@ -134,9 +146,32 @@ if(navigator.userAgent.indexOf('Line')!==-1){
       <button class="q-option" onclick="selectQ('q5','意識したことがなかった',this)"><span class="opt-main">意識したことがなかった</span><span class="opt-sub">自分時間という概念がなかった</span></button>
     </div>
   </div>
+  <div id="screen-vitalscan" class="screen">
+    <p class="vs-title">Vital Scan</p>
+    <p class="vs-sub">人差し指を置いてください</p>
+    <div class="vs-ring-wrap">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="1.5" style="filter:drop-shadow(0 0 3px rgba(20,16,10,0.35));"/>
+        <circle id="vs-pr" cx="100" cy="100" r="88" fill="none" stroke="#8a6a12" stroke-width="2.5" stroke-dasharray="553" stroke-dashoffset="553" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      </svg>
+      <div class="vs-finger-area" id="vs-fbtn">
+        <span id="vs-vitalScore" class="vs-vital-score"></span>
+        <span id="vs-flabel" class="vs-finger-label">ここに置く</span>
+        <div class="vs-finger-icon">
+          <svg width="34" height="40" viewBox="0 0 40 48" fill="none">
+            <path d="M20 6C20 6 20 4 18 4C16 4 16 6 16 6V24C16 24 14 22 12 22C10 22 9 24 10 26L16 36C17 38 19 40 22 40H26C30 40 32 36 32 32V16C32 16 32 14 30 14C28 14 28 16 28 16V20C28 20 28 18 26 18C24 18 24 20 24 20V16C24 16 24 14 22 14C20 14 20 16 20 16V6Z" stroke="#8a6a12" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <svg class="vs-wave-svg" width="320" height="60" viewBox="0 0 320 60">
+      <path id="vs-wp" d="M0,30 L320,30" fill="none" stroke="#8a6a12" stroke-width="1.8" opacity="1"/>
+    </svg>
+  </div>
   <div id="screen-loading" class="screen">
     <p class="loading-mark">∿</p>
-    <p class="loading-text" style="line-height:2.8;text-align:center;">あなたの今を、静かに読み取りながら<br>あなただけのinsightを、ひもといています</p>
+    <p id="loading-text" class="loading-text" style="line-height:2.8;text-align:center;">あなたの今を、静かに読み取りながら<br>あなただけのinsightを、ひもといています</p>
+    <button id="loading-fallback-btn" class="loading-fallback-btn" onclick="recheck()">Recheck</button>
   </div>
 
   <div id="screen-result" class="screen">
@@ -211,7 +246,7 @@ function selectQ(q,val,el){
   el.classList.add('selected');
   var btn=document.getElementById('btn-'+q+'-next');
   if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';}
-setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goTo('q5');else if(q==='q5')goToResult();},400);}
+setTimeout(function(){if(q==='q1')goTo('q2');else if(q==='q2')goTo('q3');else if(q==='q3')goTo('q5');else if(q==='q5'){fetchResult();goTo('vitalscan');startVitalScan();}},400);}
 
 function buildQ3(){
   var d=q3Map[state.q1];
@@ -231,11 +266,10 @@ function buildQ3(){
   });
 }
 
-function goToResult(){
-  goTo('loading');
-  generateResult();
-}
-async function generateResult(){
+var resultReady=false, resultData=null, resultFailed=false;
+
+async function fetchResult(){
+resultReady=false; resultData=null; resultFailed=false;
 var now=new Date();var season=getSeason(now.getMonth());var timeOfDay=getTimeOfDay(now.getHours());var moon=getMoonPhase();var element=getElement();
 var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つウェルネスコーチです。これは健康管理アプリではなく、"静かな身体理解"を届けるラグジュアリーウェルネス体験です。Aesopのエディトリアルとして書く。同じ比喩・同じ構文を繰り返さない。断定しすぎない・診断口調NG・医療断定NG・不安訴求NG・テック感NG・スピリチュアル過多NG・ネガティブ表現NG・論文調NG・説教調NG・ポジティブで上品な言葉を選ぶ。\n\n全Layer共通ルール：です・ます調を基本とする・文の途中で自然な余韻を持たせてよい・「、」は全ての文で自然に使う・「。」は最後の文末のみ使用しない・体言止めを多用しない・コピーの断片ではなく自然な文章を書く・読み手に寄り添う温かい文章・短く余白のある文章・説明しすぎない\n\n現在の季節: '+season+'\n現在の時間帯: '+timeOfDay+'\n月のフェーズ: '+moon.name+'\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n自分時間: '+state.q5+'\n\n以下のJSON形式のみで返答してください（他の文言一切不要）:\n{\n  "sensory": "役割：没入。テイスト：空気・感覚。比率：80%感覚20%身体理解。余白・温度・重さ・流れ・静けさなど抽象的な言葉で1〜2文。",\n  "insight_title": "役割：現状理解・現状認識。今の自分の身体で何が起きているかを静かに理解させる1行。それに関連する身体語（神経・ホルモン・筋肉・呼吸・体温など）を1つ自然に含める。読んだ瞬間に\'あ、だからか\'と腑に落ちる納得感。",\n  "insight": "insight_titleの現状理解を深める具体的学びを2〜3行。",\n  "evidence_title": "役割：信頼。テイスト：学び・知的。比率：20%感覚80%医科学。医科学理論と結果を結びつけた学びのある1行。最も知的で最も具体。",\n  "evidence": "evidence_titleの理論を深める科学的裏付け。栄養素・筋肉・神経・研究領域など名詞を1つ自然に含める。2〜3行。",\n  "action_title": "役割：変化実感。テイスト：実践・具体。比率：10%感覚90%実践。得られるベネフィットを先に示し動機付けになる1行。今すぐ身体変化が想像できる具体的解決法。",\n  "action": "action_titleのベネフィットを実現する具体的行動。エクササイズ・ストレッチ・呼吸法・ボディケア・セラピー・食事など具体的な行動名を必ず1つ含む。回数・時間・食材名など数値や名称を含む。テーマに沿ったカテゴリから選ぶ。2〜3行。",\n  "recipe_title": "Layer5・期待感・情緒。\'やってみたい\'と思わせるレシピ名。温度感・香り・色・季節感など感情に触れる言葉を使う。",\n  "recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む",\n  "recipe_type": "料理・スムージー・ドリンク・スープのいずれか",\n  "moon_message": "月のフェーズ・コンディション・季節・時間帯を自然に絡めた一言。詩的で余韻のある日本語。〜の夜で終わること。必ず15文字以内に収めること（1文字も超えてはいけません）。文末に句点「。」を絶対に使用しないこと（文中の読点「、」は使ってよい）。断定しない。スピリチュアル過多NG。",\n  "ingredients": "材料（5品目以内・分量付き・改行は\\nで）",\n  "steps": "手順（3ステップ以内・改行は\\nで）",\n  "note": "食べ方・飲み方の一言。やってみたいと思わせる期待感・温度感・情緒を重視",\n  "energy": エネルギースコア（0〜100の整数）,\n  "mind": マインドスコア（0〜100の整数）,\n  "flow": フロースコア（0〜100の整数）\n}\n\n重要：**などのマークダウン記号は絶対に使わないこと。';
   try {
@@ -250,6 +284,15 @@ var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つ�
     var text = data.candidates[0].content.parts.map(function(i){return i.text||'';}).join('');
     text = text.replace(/```json|```/g,'').trim();
     var r = JSON.parse(text);
+    resultData = {r:r, moon:moon, element:element};
+    resultReady = true;
+  } catch(e){
+    resultFailed = true;
+  }
+}
+
+function renderResult(){
+    var r=resultData.r, moon=resultData.moon, element=resultData.element;
     document.getElementById('result-sensory').textContent=r.sensory;document.getElementById('moon-svg').innerHTML=moon.svg;document.getElementById('moon-name').textContent=moon.name;document.getElementById('moon-message').textContent=r.moon_message;document.getElementById('element-svg').innerHTML=getElementSvg(element.name);document.getElementById('element-name-en').textContent=element.name;document.getElementById('element-name-jp').textContent=' の日';document.getElementById('element-message').textContent=element.msg;['block-sensory','block-insight','block-evidence','block-action','block-recipe'].forEach(function(id){var el=document.getElementById(id);if(el){setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},300);}});
     var circ=2*Math.PI*28;document.getElementById('num-energy').textContent=r.energy;document.getElementById('ring-energy').setAttribute('stroke-dasharray',(circ*r.energy/100)+' '+circ);document.getElementById('num-mind').textContent=r.mind;document.getElementById('ring-mind').setAttribute('stroke-dasharray',(circ*r.mind/100)+' '+circ);document.getElementById('num-flow').textContent=r.flow;document.getElementById('ring-flow').setAttribute('stroke-dasharray',(circ*r.flow/100)+' '+circ);
     document.getElementById('result-insight-title').textContent=r.insight_title;document.getElementById('result-insight').textContent=r.insight;
@@ -257,19 +300,139 @@ var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つ�
     document.getElementById('result-evidence-title').textContent=r.evidence_title;document.getElementById('result-evidence').textContent=r.evidence;
     document.getElementById('result-recipe-title').textContent=r.recipe_title;document.getElementById('result-recipe').innerHTML=r.recipe_concept.replace(/\*\*/g,'')+'<br><br><span style="font-size:9px;letter-spacing:0.2em;color:#1a1610;text-transform:uppercase;display:block;">— 材料</span><span style="display:block;margin-top:8px;">'+r.ingredients.replace(/\*\*/g,'').replace(/\n/g,'<br>')+'</span><span style="font-size:9px;letter-spacing:0.2em;color:#1a1610;text-transform:uppercase;display:block;margin-top:12px;">— 作り方</span><span style="display:block;margin-top:8px;">'+r.steps.replace(/\*\*/g,'').replace(/\n/g,'<br>').replace(/(\d+)\./g,'$1. ')+'</span><br><span style="font-size:12px;font-family:\'Noto Sans JP\',sans-serif;font-weight:200;color:#1a1610;">'+r.note.replace(/\*\*/g,'')+'</span>';
     goTo('result');
-  } catch(e){
-    // fallback
-    document.getElementById('result-summary').innerHTML='現在混み合っています。<br>画面下部の RECHECK よりもう一度お試しください。';
-    document.getElementById('result-insight').innerHTML='<strong>今のあなたへ</strong><br>選択いただいた内容をもとに、今のあなたに必要なケアをお伝えします。';
-    document.getElementById('result-action').innerHTML='<strong>まず一歩</strong><br>まず今日一つ、小さなことから始めてみましょう。';
-    document.getElementById('result-evidence').innerHTML='<strong>習慣の力</strong><br>日々の小さな習慣の積み重ねが、身体と心を整えていきます。';
-    goTo('result');
+}
+
+function renderResultFallback(){
+    document.getElementById('result-sensory').textContent='現在混み合っています。画面下部の RECHECK よりもう一度お試しください。';
+    document.getElementById('result-insight-title').textContent='今のあなたへ';
+    document.getElementById('result-insight').textContent='選択いただいた内容をもとに、今のあなたに必要なケアをお伝えします。';
+    document.getElementById('result-action-title').textContent='まず一歩';
+    document.getElementById('result-action').textContent='まず今日一つ、小さなことから始めてみましょう。';
+    document.getElementById('result-evidence-title').textContent='習慣の力';
+    document.getElementById('result-evidence').textContent='日々の小さな積み重ねが、身体と心を整えていきます。';
+    document.getElementById('result-recipe-title').textContent='今日のひと皿';
+    document.getElementById('result-recipe').innerHTML='今はご用意できませんでした。次回の診断で、あなたに合わせたレシピをお届けします。';
+    ['block-sensory','block-insight','block-evidence','block-action','block-recipe'].forEach(function(id){var el=document.getElementById(id);if(el){setTimeout(function(){el.style.opacity='1';el.style.transform='translateY(0)';},300);}});
+}
+
+function showLoadingFallback(){
+  document.getElementById('loading-text').innerHTML='ただいま混み合っております<br>間をおいて再度お試しください';
+  document.getElementById('loading-fallback-btn').style.display='inline-block';
+}
+
+var vsPressed=false, vsDone=false, vsProgress=0, vsLastT=null, vsElapsed=0;
+var vsDur=8000;
+var vsPr,vsWp,vsFlabel,vsFbtn,vsVitalEl;
+var vsCurAmp=0, vsTargetAmp=0, vsNextAmpAt=0;
+var vsPhase1=0, vsPhase2=Math.random()*10, vsPhase3=Math.random()*10;
+var vsReleasing=false, vsNextVitalAt=0;
+
+function vsPickTargetAmp(){ return 6 + Math.random()*16; }
+
+function startVitalScan(){
+  vsPr=document.getElementById('vs-pr');
+  vsWp=document.getElementById('vs-wp');
+  vsFlabel=document.getElementById('vs-flabel');
+  vsFbtn=document.getElementById('vs-fbtn');
+  vsVitalEl=document.getElementById('vs-vitalScore');
+  vsPressed=false; vsDone=false; vsReleasing=false;
+  vsProgress=0; vsLastT=null; vsElapsed=0;
+  vsCurAmp=0; vsTargetAmp=0; vsNextAmpAt=0; vsNextVitalAt=0;
+  vsPr.setAttribute('stroke-dashoffset',553);
+  vsWp.setAttribute('d','M0,30 L320,30');
+  vsFlabel.textContent='ここに置く';
+  vsVitalEl.textContent='';
+  vsFbtn.onmousedown=vsStartPress;
+  vsFbtn.ontouchstart=function(e){e.preventDefault();vsStartPress();};
+  document.onmouseup=vsEndPress;
+  document.ontouchend=vsEndPress;
+}
+
+function vsUpdateVital(val){ vsVitalEl.textContent='Vital '+val; }
+
+function vsStartPress(){
+  if(vsDone)return;
+  vsPressed=true; vsReleasing=false;
+  vsFlabel.textContent='スキャン中...';
+  requestAnimationFrame(vsFrame);
+}
+function vsEndPress(){
+  if(vsDone||!vsPressed)return;
+  vsPressed=false; vsReleasing=true;
+  vsFlabel.textContent='ここに置く';
+  vsVitalEl.textContent='';
+}
+
+function vsDrawWave(t, ampScale){
+  var d='M0,30';
+  for(var i=1;i<=80;i++){
+    var x=i/80*320, xp=(i-1)/80*320;
+    var y = 30 + Math.sin(i/80*Math.PI*4 + t*1.6 + vsPhase1)*vsCurAmp*0.55*ampScale
+              + Math.sin(i/80*Math.PI*7 + t*2.3 + vsPhase2)*vsCurAmp*0.30*ampScale
+              + Math.sin(i/80*Math.PI*11 + t*3.1 + vsPhase3)*vsCurAmp*0.15*ampScale;
+    var yp = 30 + Math.sin((i-1)/80*Math.PI*4 + t*1.6 + vsPhase1)*vsCurAmp*0.55*ampScale
+               + Math.sin((i-1)/80*Math.PI*7 + t*2.3 + vsPhase2)*vsCurAmp*0.30*ampScale
+               + Math.sin((i-1)/80*Math.PI*11 + t*3.1 + vsPhase3)*vsCurAmp*0.15*ampScale;
+    d += ' C'+(xp+(x-xp)*0.4)+','+yp+' '+(xp+(x-xp)*0.6)+','+y+' '+x+','+y;
   }
+  vsWp.setAttribute('d',d);
+}
+
+function vsFrame(ts){
+  if(!vsPressed && !vsReleasing && !vsDone) return;
+  if(!vsLastT) vsLastT=ts;
+  var dt=ts-vsLastT; vsLastT=ts;
+  var t=ts/1000;
+
+  if(vsPressed && !vsDone){
+    vsElapsed+=dt;
+    vsProgress=Math.min(vsElapsed/vsDur,1);
+    vsPr.setAttribute('stroke-dashoffset', 553*(1-vsProgress));
+    if(ts>vsNextAmpAt){ vsTargetAmp=vsPickTargetAmp(); vsNextAmpAt=ts+500+Math.random()*500; }
+    vsCurAmp += (vsTargetAmp-vsCurAmp)*0.06;
+    if(ts>vsNextVitalAt){ vsUpdateVital(Math.floor(60+Math.random()*36)); vsNextVitalAt=ts+280+Math.random()*220; }
+    vsDrawWave(t, vsProgress);
+    if(vsProgress>=1){
+      vsDone=true;
+      vsUpdateVital(Math.floor(60+Math.random()*36));
+      vsFlabel.textContent='スキャン完了';
+      onVitalScanComplete();
+      return;
+    }
+    requestAnimationFrame(vsFrame);
+    return;
+  }
+
+  if(vsReleasing){
+    vsTargetAmp=0;
+    vsCurAmp += (vsTargetAmp-vsCurAmp)*0.08;
+    vsDrawWave(t, vsProgress);
+    if(vsCurAmp<0.3){ vsCurAmp=0; vsReleasing=false; vsWp.setAttribute('d','M0,30 L320,30'); return; }
+    requestAnimationFrame(vsFrame);
+  }
+}
+
+function onVitalScanComplete(){
+  if(resultReady){ renderResult(); return; }
+  if(resultFailed){ goTo('loading'); renderResultFallback(); goTo('result'); return; }
+  goTo('loading');
+  var elapsedWait=0;
+  var watchInterval=setInterval(function(){
+    elapsedWait+=300;
+    if(resultReady){ clearInterval(watchInterval); renderResult(); }
+    else if(resultFailed || elapsedWait>=15000){
+      clearInterval(watchInterval);
+      if(resultFailed){ renderResultFallback(); goTo('result'); }
+      else { showLoadingFallback(); }
+    }
+  }, 300);
 }
 
 function recheck(){
   state={q1:null,q2:null,q3:null,q4:null,q5:null};
   document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected');});
+  document.getElementById('loading-text').innerHTML='あなたの今を、静かに読み取りながら<br>あなただけのinsightを、ひもといています';
+  document.getElementById('loading-fallback-btn').style.display='none';
   goTo('top');
 }
 </script>
