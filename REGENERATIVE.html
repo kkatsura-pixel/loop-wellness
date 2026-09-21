@@ -257,8 +257,10 @@ var q3Map={
         cur.pause();
         setTimeout(function(){ cur.currentTime = 0; }, 300);
       }
-      nxt.addEventListener('playing', onPlaying);
-      nxt.play();
+      setTimeout(function(){
+        nxt.addEventListener('playing', onPlaying);
+        nxt.play();
+      }, 500);
     });
   }
   attachEnded(vA, vB);
