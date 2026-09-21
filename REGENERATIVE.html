@@ -110,7 +110,7 @@ if(navigator.userAgent.indexOf('Line')!==-1){
   <h2 style="position:absolute;left:-9999px;font-size:1px">Social Wellness Club LOOP</h2>
 
   <div id="screen-top" class="screen active">
-    <video id="top-video-a" class="bg-video is-visible" src="top-video-forward.mp4" autoplay muted playsinline preload="auto"></video>
+    <video id="top-video-a" class="bg-video is-visible" src="top-video-forward.mp4" poster="top-video-poster.jpg" autoplay muted playsinline preload="auto"></video>
     <video id="top-video-b" class="bg-video" src="top-video-reverse.mp4" muted playsinline preload="auto"></video>
     <button class="btn-start" onclick="goTo('q1')">Check Start →</button>
   </div>
@@ -250,11 +250,15 @@ var q3Map={
   vB.playbackRate = 0.9;
   function attachEnded(cur, nxt){
     cur.addEventListener('ended', function(){
-      nxt.classList.add('is-visible');
-      cur.classList.remove('is-visible');
+      function onPlaying(){
+        nxt.removeEventListener('playing', onPlaying);
+        nxt.classList.add('is-visible');
+        cur.classList.remove('is-visible');
+        cur.pause();
+        setTimeout(function(){ cur.currentTime = 0; }, 300);
+      }
+      nxt.addEventListener('playing', onPlaying);
       nxt.play();
-      cur.pause();
-      setTimeout(function(){ cur.currentTime = 0; }, 300);
     });
   }
   attachEnded(vA, vB);
