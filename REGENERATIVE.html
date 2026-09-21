@@ -254,7 +254,7 @@ var q3Map={
       cur.classList.remove('is-visible');
       nxt.play();
       cur.pause();
-      cur.currentTime = 0;
+      setTimeout(function(){ cur.currentTime = 0; }, 300);
     });
   }
   attachEnded(vA, vB);
