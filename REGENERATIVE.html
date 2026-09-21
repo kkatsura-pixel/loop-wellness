@@ -259,6 +259,7 @@ var q3Map={
   }
   attachEnded(vA, vB);
   attachEnded(vB, vA);
+  vB.play().then(function(){ vB.pause(); vB.currentTime = 0; }).catch(function(){});
 })();
 
 function goTo(s){
