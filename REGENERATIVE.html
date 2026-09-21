@@ -250,11 +250,11 @@ var q3Map={
   vB.playbackRate = 0.9;
   function attachEnded(cur, nxt){
     cur.addEventListener('ended', function(){
-      nxt.currentTime = 0;
-      nxt.playbackRate = 0.9;
       nxt.classList.add('is-visible');
       cur.classList.remove('is-visible');
       nxt.play();
+      cur.pause();
+      cur.currentTime = 0;
     });
   }
   attachEnded(vA, vB);
