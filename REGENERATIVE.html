@@ -214,7 +214,7 @@ setLineScreenHeight();
 
 <img src="IMG_3123.png" style="width:80%;height:auto;margin-right:auto;display:block;margin-top:40px;margin-bottom:8px;">
 
-<div class="result-block" id="block-evidence" style="opacity:0;transform:translateY(20px);transition:all 0.6s ease 0.2s;"><p class="result-block-label">Evidence</p><p id="result-evidence-title" class="result-block-body" style="font-weight:700;margin-top:8px;"></p><button class="btn-detail is-closed" id="btn-evidence" onclick="toggleBlock('evidence')">詳しく見る→</button><p id="result-evidence" class="result-block-body result-block-expand"></p></div>
+<div class="result-block" id="block-evidence" style="opacity:0;transform:translateY(20px);transition:all 0.6s ease 0.2s;"><p class="result-block-label">Evidence</p><p id="result-evidence-title" class="result-block-body" style="font-weight:700;margin-top:8px;"></p><button class="btn-detail is-closed" id="btn-evidence" onclick="toggleBlock('evidence')">詳しく見る→</button><div id="result-evidence" class="result-block-body result-block-expand"></div></div>
 
 <img src="IMG_3102.png" style="width:80%;height:auto;margin-left:auto;display:block;margin-top:40px;margin-bottom:8px;">
 
@@ -358,6 +358,104 @@ var t=pickTrack(mood);
 return '<hr class="sound-divider"><div class="sound-label"><span class="bar"></span>Sound</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb">♪</div><div class="track-info"><div class="track-tag">'+mood+' / '+moodTracks[mood].jp+'</div><div class="track-title">'+t.title+'</div><div class="track-artist">'+t.artist+'</div></div><a class="track-play" href="'+t.url+'" target="_blank" rel="noopener">▶</a></div>';
 }
 
+var products = {
+CALM:{jp:'凪',items:[
+{name:'台湾茶プロテイン',brand:'DAYLILY',asin:'B0D9P8V815'},
+{name:'台湾茶プロテイン',brand:'DAYLILY',asin:'B0CZTWJH1H'},
+{name:'プロテインシェイカー',brand:'DAYLILY',asin:'B0FFZDWB5K'},
+{name:'Refill BEAU TEA Favorite Things',brand:'DAYLILY',asin:'B09S3K7NV2'},
+{name:'BEAU TEA Favorite Things',brand:'DAYLILY',asin:'B09S31RVXK'},
+{name:'Beau Tea 台湾甘杏仁茶',brand:'DAYLILY',asin:'B09SF56QTK'},
+{name:'食べるはちみつ HONEY',brand:'DAYLILY',asin:'B0H98MLG64'},
+{name:'モーニングルーティンキット',brand:'DAYLILY',asin:'B0H95759JZ'},
+{name:'お茶とお菓子ギフトセット',brand:'DAYLILY',asin:'B0B6DHQT9C'},
+{name:'BEAU TEA Thinkin',brand:'DAYLILY',asin:'B09SH2T9F6'},
+{name:'BEAU TEA Lovely',brand:'DAYLILY',asin:'B09S3JZY67'},
+{name:'BEAU TEA City Stars',brand:'DAYLILY',asin:'B0C2Q54PT2'}
+]},
+ACTIVE:{jp:'律動',items:[
+{name:'スーツアップパンツ',brand:'Alo Yoga',asin:'B0HB3YXXN8'},
+{name:'Accolade Hoodie',brand:'Alo Yoga',asin:'B0HHRTYB63'},
+{name:'Accolade Pullover',brand:'Alo Yoga',asin:'B0HHR55P3R'},
+{name:'タンクトップ Aspire',brand:'Alo Yoga',asin:'B0H2YJHF1K'},
+{name:'アクティブフレアレギンス',brand:'エミYOGA',asin:'B0GSR7X5DS'},
+{name:'アクティブブラトップ',brand:'エミYOGA',asin:'B0GST6RVNT'},
+{name:'Henri Matisse ニットプルオーバー',brand:'エミ',asin:'B0H5J8QT3F'},
+{name:'FEATHER LIGHT',brand:'XEXYMIX',asin:'B0H8CXG11F'},
+{name:'オーバーフィットヨガウェア',brand:'XEXYMIX',asin:'B0CL6F3XNF'},
+{name:'シグネチャー360N',brand:'ゼクシィミックス',asin:'B08SW5R78M'}
+]},
+REST:{jp:'休息',items:[
+{name:'オードゥ カンパーニュ バスオイル',brand:'SISLEY',asin:'B00KRFO5W2'},
+{name:'バス&シャワーオイル',brand:'アロマセラピーアソシエイツ',asin:'B000GX56RI'},
+{name:'ビーサイレント バスコンセントレイト',brand:'bamford',asin:'B0827RYCXZ'},
+{name:'ゼラニウムバスオイル',brand:'bamford',asin:'B07TJTF7BD'},
+{name:'ライム バジル&マンダリン バスオイル',brand:'ジョーマローン',asin:'B072M2XYXM'},
+{name:'ミルクバス&ボディオイル ベルガモット',brand:'PANPURI',asin:'B0GXV6LQ4Q'},
+{name:'シーウィード&アルニカ バスソルト',brand:"Neal's Yard Remedies",asin:'B0D97PRP4X'},
+{name:'アロマティックバスソルト',brand:"Neal's Yard Remedies",asin:'B0D97PPWHF'},
+{name:'ラベンダーバスソルト',brand:"Neal's Yard Remedies",asin:'B0D97QHK1V'},
+{name:'バスエッセンス ジュニパー・エキナセア',brand:'nahrin',asin:'B0GFDGVHQS'},
+{name:'バロン バスソルトギフト(四季の香り)',brand:'BALLON',asin:'B0CJTGPZ18'},
+{name:'ラヴァンド フォーミングバス',brand:'ロクシタン',asin:'B0GWQSH4HH'},
+{name:'バスエッセンス ヒノキ',brand:'KITOWA',asin:'B0H4CWH2TC'},
+{name:'トリートメントバスエッセンス 250mL',brand:'HACCI',asin:'B0DK4TH15X'},
+{name:'バスソルト ミルキーハニー',brand:'HACCI',asin:'B0FZTWLJ4P'},
+{name:'バスソルト ウッディハニー',brand:'HACCI',asin:'B0FZTVTJ99'},
+{name:'バスソルト ドラマティックハニー',brand:'HACCI',asin:'B0FZTWHD93'},
+{name:'バスソルト フローラルハニー',brand:'HACCI',asin:'B0FZTYGXLZ'},
+{name:'バスソルト ザクロ',brand:'サンタ・マリア・ノヴェッラ',asin:'B0CRKLFB8L'},
+{name:'PERFUME INTRODUCTION ビネガーバスエッセンス',brand:'SHIRO',asin:'B0FPX8NXCH'},
+{name:'ホワイトティー バスソルト',brand:'SHIRO',asin:'B0C9HDD6FT'}
+]},
+STILL:{jp:'静寂',items:[
+{name:'キャンドル',brand:'Diptyque',asin:'B0177IY7EM'},
+{name:'キャンドル',brand:'Diptyque',asin:'B0177IZXTK'},
+{name:'キャンドル ベンジョワン',brand:'Diptyque',asin:'B0BSRR11TK'},
+{name:'キャンドル ローズ',brand:'Diptyque',asin:'B0177IZO4E'},
+{name:'キャンドル',brand:'Diptyque',asin:'B07QZKKQ7P'},
+{name:'キャンドル',brand:'Diptyque',asin:'B071DSYJ4Y'},
+{name:'キャンドル フィギエ',brand:'Diptyque',asin:'B0177IZK1G'},
+{name:'キャンドル テュベルーズ',brand:'Diptyque',asin:'B0177IYX6E'},
+{name:'キャンドル フィギエ',brand:'Diptyque',asin:'B0177IZZES'},
+{name:'キャンドル ミモザ',brand:'Diptyque',asin:'B004SFGIMW'},
+{name:'キャンドル オランジェ',brand:'Diptyque',asin:'B08HLRJK6C'},
+{name:'キャンドル ショワジャ',brand:'Diptyque',asin:'B0177IY93G'}
+]},
+RENEW:{jp:'転換',items:[
+{name:'リップクリーム バランシング',brand:'THREE',asin:'B0D5M6YJR6'},
+{name:'ボディ乳液 エッセンシャルセンツ',brand:'THREE',asin:'B0FSQN9CYK'},
+{name:'ハンドウォッシュ ピュリファイング',brand:'THREE',asin:'B0FSQFB28C'},
+{name:'ヘアトリートメントウォーター',brand:'THREE',asin:'B0F4K3LB3L'},
+{name:'ヘアオイル トリートメント',brand:'THREE',asin:'B0F4K4TJ54'},
+{name:'トライアルキット バランシング',brand:'THREE',asin:'B0HF7LF5JP'},
+{name:'メイク落とし バランシング',brand:'THREE',asin:'B0GXJ82LQ6'},
+{name:'シャンプー ピュリファイング',brand:'THREE',asin:'B0F4K3PD5H'},
+{name:'コンディショニングローション バランシング',brand:'THREE',asin:'B0HDD1N1T3'},
+{name:'オーバーナイトオイルセラム SQ',brand:'THREE',asin:'B0CJQQQQFX'}
+]},
+TENDER:{jp:'慈しみ',items:[
+{name:'ユイル・アンティーク ローズ・ドゥ・ダマス',brand:'Buly 1803',asin:'B07HNSTVBV'},
+{name:'ユイル・アンティーク リケン・デコス',brand:'Buly 1803',asin:'B07HNS743Z'},
+{name:'ユイル・アンティーク チュベローズ・デュ・メキシク',brand:'Buly 1803',asin:'B07HNT8FGR'},
+{name:'ユイル・アンティーク フルール・ドランジェ 190ml',brand:'Buly 1803',asin:'B09QYG76KP'},
+{name:'ユイル・アンティーク ヘリオトロープ・デュ・ペルー',brand:'Buly 1803',asin:'B0BGBL16GR'},
+{name:'ユイル・アンティーク フルール・ドランジェ',brand:'Buly 1803',asin:'B0BGBP4J4B'},
+{name:'ユイル・アンティーク チュベローズ・デュ・メキシク',brand:'Buly 1803',asin:'B0BXT841PH'},
+{name:'ユイル・アンティーク ローズ・ドゥ・ダマス(Birthday)',brand:'Buly 1803',asin:'B0BGBNYSJN'},
+{name:'ユイル・アンティーク アル・カシール(Christmas)',brand:'Buly 1803',asin:'B0BQB2MPZW'}
+]}
+};
+function pickProduct(mood){
+var list=products[mood].items;
+return list[Math.floor(Math.random()*list.length)];
+}
+function buildEvidenceHtml(caption,mood){
+var p=pickProduct(mood);
+var url='https://www.amazon.co.jp/dp/'+p.asin+'?tag=socialwellnes-22';
+return '<hr class="sound-divider"><div class="sound-label"><span class="bar"></span>Select</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb">✦</div><div class="track-info"><div class="track-tag">'+mood+' / '+products[mood].jp+'</div><div class="track-title">'+p.name+'</div><div class="track-artist">'+p.brand+'</div></div><a class="track-play" href="'+url+'" target="_blank" rel="noopener">→</a></div>';
+}
+
 var state={q1:null,q2:null,q3:null,q4:null,q5:null};
 var q3Map={
 '姿勢・コンディション':{title:'どの部位に意識を向けますか？',opts:[{v:'首・頭まわり（こりや重さ）',m:'首・頭まわり',s:'こりや重さを感じる'},{v:'肩・肩甲骨（緊張や動かしにくさ）',m:'肩・肩甲骨',s:'緊張や動かしにくさ'},{v:'腰まわり（張りや違和感）',m:'腰まわり',s:'張りや違和感'},{v:'姿勢バランス（背中・骨盤）',m:'姿勢バランス',s:'背中・骨盤の整い'}]},
@@ -425,7 +523,7 @@ var resultReady=false, resultData=null, resultFailed=false;
 async function fetchResult(){
 resultReady=false; resultData=null; resultFailed=false;
 var now=new Date();var season=getSeason(now.getMonth());var timeOfDay=getTimeOfDay(now.getHours());var moon=getMoonPhase();var element=getElement();
-var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つウェルネスコーチです。これは健康管理アプリではなく、"静かな身体理解"を届けるラグジュアリーウェルネス体験です。Aesopのエディトリアルとして書く。同じ比喩・同じ構文を繰り返さない。断定しすぎない・診断口調NG・医療断定NG・不安訴求NG・テック感NG・スピリチュアル過多NG・ネガティブ表現NG・論文調NG・説教調NG・ポジティブで上品な言葉を選ぶ。\n\n全Layer共通ルール：です・ます調を基本とする・文の途中で自然な余韻を持たせてよい・「、」は全ての文で自然に使う・「。」は最後の文末のみ使用しない・体言止めを多用しない・コピーの断片ではなく自然な文章を書く・読み手に寄り添う温かい文章・短く余白のある文章・説明しすぎない\n\n現在の季節: '+season+'\n現在の時間帯: '+timeOfDay+'\n月のフェーズ: '+moon.name+'\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n自分時間: '+state.q5+'\n\n以下のJSON形式のみで返答してください（他の文言一切不要）:\n{\n "sensory": "役割：没入。テイスト：空気・感覚。比率：80%感覚20%身体理解。余白・温度・重さ・流れ・静けさなど抽象的な言葉で1〜2文。",\n "insight_title": "役割：現状理解・現状認識。今の自分の身体で何が起きているかを静かに理解させる1行。それに関連する身体語（神経・ホルモン・筋肉・呼吸・体温など）を1つ自然に含める。読んだ瞬間に\'あ、だからか\'と腑に落ちる納得感。",\n "insight": "insight_titleの現状理解を深める具体的学びを2〜3行。",\n "evidence_title": "役割：信頼。テイスト：学び・知的。比率：20%感覚80%医科学。医科学理論と結果を結びつけた学びのある1行。最も知的で最も具体。",\n "evidence": "evidence_titleの理論を深める科学的裏付け。栄養素・筋肉・神経・研究領域など名詞を1つ自然に含める。2〜3行。",\n "action_title": "役割：変化実感。テイスト：実践・具体。比率：10%感覚90%実践。得られるベネフィットを先に示し動機付けになる1行。今すぐ身体変化が想像できる具体的解決法。",\n "action": "action_titleのベネフィットを実現する具体的行動。エクササイズ・ストレッチ・呼吸法・ボディケア・セラピー・食事など具体的な行動名を必ず1つ含む。回数・時間・食材名など数値や名称を含む。テーマに沿ったカテゴリから選ぶ。2〜3行。",\n "sound_caption": "役割：橋渡し。曲そのものの説明やジャンル名には触れず、\'今のあなたに寄り添う一曲です\'という一言を、です・ます調で。断定的な言い切りは避け、体言止めは多用しない。必ず25〜35文字に収めること（1文字も超えてはいけません）。",\n "recipe_title": "Layer5・期待感・情緒。\'やってみたい\'と思わせるレシピ名。温度感・香り・色・季節感など感情に触れる言葉を使う。",\n "recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む",\n "recipe_type": "料理・スムージー・ドリンク・スープのいずれか",\n "moon_message": "月のフェーズ・コンディション・季節・時間帯を自然に絡めた一言。詩的で余韻のある日本語。〜の夜で終わること。必ず15文字以内に収めること（1文字も超えてはいけません）。文末に句点「。」を絶対に使用しないこと（文中の読点「、」は使ってよい）。断定しない。スピリチュアル過多NG。",\n "ingredients": "材料（5品目以内・分量付き・改行は\\nで）",\n "steps": "手順（3ステップ以内・改行は\\nで）",\n "note": "食べ方・飲み方の一言。やってみたいと思わせる期待感・温度感・情緒を重視",\n "energy": エネルギースコア（0〜100の整数）,\n "mind": マインドスコア（0〜100の整数）,\n "flow": フロースコア（0〜100の整数）\n}\n\n重要：**などのマークダウン記号は絶対に使わないこと。';
+var prompt = 'あなたはquiet luxury × sensory wellnessの世界観を持つウェルネスコーチです。これは健康管理アプリではなく、"静かな身体理解"を届けるラグジュアリーウェルネス体験です。Aesopのエディトリアルとして書く。同じ比喩・同じ構文を繰り返さない。断定しすぎない・診断口調NG・医療断定NG・不安訴求NG・テック感NG・スピリチュアル過多NG・ネガティブ表現NG・論文調NG・説教調NG・ポジティブで上品な言葉を選ぶ。\n\n全Layer共通ルール：です・ます調を基本とする・文の途中で自然な余韻を持たせてよい・「、」は全ての文で自然に使う・「。」は最後の文末のみ使用しない・体言止めを多用しない・コピーの断片ではなく自然な文章を書く・読み手に寄り添う温かい文章・短く余白のある文章・説明しすぎない\n\n現在の季節: '+season+'\n現在の時間帯: '+timeOfDay+'\n月のフェーズ: '+moon.name+'\nテーマ: '+state.q1+'\nコンディション: '+state.q2+'\n詳細: '+state.q3+'\n自分時間: '+state.q5+'\n\n以下のJSON形式のみで返答してください（他の文言一切不要）:\n{\n "sensory": "役割：没入。テイスト：空気・感覚。比率：80%感覚20%身体理解。余白・温度・重さ・流れ・静けさなど抽象的な言葉で1〜2文。",\n "insight_title": "役割：現状理解・現状認識。今の自分の身体で何が起きているかを静かに理解させる1行。それに関連する身体語（神経・ホルモン・筋肉・呼吸・体温など）を1つ自然に含める。読んだ瞬間に\'あ、だからか\'と腑に落ちる納得感。",\n "insight": "insight_titleの現状理解を深める具体的学びを2〜3行。",\n "evidence_title": "役割：信頼。テイスト：学び・知的。比率：20%感覚80%医科学。医科学理論と結果を結びつけた学びのある1行。最も知的で最も具体。",\n "evidence": "evidence_titleの理論を深める科学的裏付け。栄養素・筋肉・神経・研究領域など名詞を1つ自然に含める。2〜3行。",\n "action_title": "役割：変化実感。テイスト：実践・具体。比率：10%感覚90%実践。得られるベネフィットを先に示し動機付けになる1行。今すぐ身体変化が想像できる具体的解決法。",\n "action": "action_titleのベネフィットを実現する具体的行動。エクササイズ・ストレッチ・呼吸法・ボディケア・セラピー・食事など具体的な行動名を必ず1つ含む。回数・時間・食材名など数値や名称を含む。テーマに沿ったカテゴリから選ぶ。2〜3行。",\n "sound_caption": "役割：橋渡し。曲そのものの説明やジャンル名には触れず、\'今のあなたに寄り添う一曲です\'という一言を、です・ます調で。断定的な言い切りは避け、体言止めは多用しない。必ず25〜35文字に収めること（1文字も超えてはいけません）。",\n "product_caption": "役割：橋渡し。商品そのものの説明や効能には触れず、\'今のあなたに寄り添う一品です\'という一言を、です・ます調で。断定的な言い切りは避け、体言止めは多用しない。必ず25〜35文字に収めること（1文字も超えてはいけません）。",\n "recipe_title": "Layer5・期待感・情緒。\'やってみたい\'と思わせるレシピ名。温度感・香り・色・季節感など感情に触れる言葉を使う。",\n "recipe_concept": "このレシピがなぜ今のあなたに必要かを1行で。栄養素名を含む",\n "recipe_type": "料理・スムージー・ドリンク・スープのいずれか",\n "moon_message": "月のフェーズ・コンディション・季節・時間帯を自然に絡めた一言。詩的で余韻のある日本語。〜の夜で終わること。必ず15文字以内に収めること（1文字も超えてはいけません）。文末に句点「。」を絶対に使用しないこと（文中の読点「、」は使ってよい）。断定しない。スピリチュアル過多NG。",\n "ingredients": "材料（5品目以内・分量付き・改行は\\nで）",\n "steps": "手順（3ステップ以内・改行は\\nで）",\n "note": "食べ方・飲み方の一言。やってみたいと思わせる期待感・温度感・情緒を重視",\n "energy": エネルギースコア（0〜100の整数）,\n "mind": マインドスコア（0〜100の整数）,\n "flow": フロースコア（0〜100の整数）\n}\n\n重要：**などのマークダウン記号は絶対に使わないこと。';
 try {
 var resp = await fetch('https://regenerative-proxy.koshiro-katsura.workers.dev',{
 method:'POST',
@@ -451,7 +549,7 @@ document.getElementById('result-sensory').textContent=r.sensory;document.getElem
 var circ=2*Math.PI*28;document.getElementById('num-energy').textContent=r.energy;document.getElementById('ring-energy').setAttribute('stroke-dasharray',(circ*r.energy/100)+' '+circ);document.getElementById('num-mind').textContent=r.mind;document.getElementById('ring-mind').setAttribute('stroke-dasharray',(circ*r.mind/100)+' '+circ);document.getElementById('num-flow').textContent=r.flow;document.getElementById('ring-flow').setAttribute('stroke-dasharray',(circ*r.flow/100)+' '+circ);
 document.getElementById('result-insight-title').textContent=r.insight_title;document.getElementById('result-insight').innerHTML=r.insight+buildSoundHtml(r.sound_caption,pickMood(r.energy,r.mind,r.flow));
 document.getElementById('result-action-title').textContent=r.action_title;document.getElementById('result-action').textContent=r.action;
-document.getElementById('result-evidence-title').textContent=r.evidence_title;document.getElementById('result-evidence').textContent=r.evidence;
+document.getElementById('result-evidence-title').textContent=r.evidence_title;document.getElementById('result-evidence').innerHTML=r.evidence+buildEvidenceHtml(r.product_caption,pickMood(r.energy,r.mind,r.flow));
 document.getElementById('result-recipe-title').textContent=r.recipe_title;document.getElementById('result-recipe').innerHTML=r.recipe_concept.replace(/\*\*/g,'')+'<br><br><span style="font-size:9px;letter-spacing:0.2em;color:#1a1610;text-transform:uppercase;display:block;">— 材料</span><span style="display:block;margin-top:8px;">'+r.ingredients.replace(/\*\*/g,'').replace(/\n/g,'<br>')+'</span><span style="font-size:9px;letter-spacing:0.2em;color:#1a1610;text-transform:uppercase;display:block;margin-top:12px;">— 作り方</span><span style="display:block;margin-top:8px;">'+r.steps.replace(/\*\*/g,'').replace(/\n/g,'<br>').replace(/(\d+)\./g,'$1. ')+'</span><br><span style="font-size:12px;font-family:\'Noto Sans JP\',sans-serif;font-weight:200;color:#1a1610;">'+r.note.replace(/\*\*/g,'')+'</span>';
 goTo('result');
 }
