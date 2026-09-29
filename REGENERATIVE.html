@@ -483,7 +483,7 @@ return recipeVideos[Math.floor(Math.random()*recipeVideos.length)];
 }
 function buildRecipeVideoHtml(caption){
 var v=pickVideo();
-return '<hr class="sound-divider"><div class="sound-label" style="text-transform:none;"><span class="bar"></span>Plant − Based Recipe</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb">▶</div><div class="track-info"><div class="track-tag">Clean Eating / 美食</div><div class="track-title">'+v.title+'</div><div class="track-artist">'+v.channel+'</div></div><a class="track-play" href="'+v.url+'" target="_blank" rel="noopener">→</a></div>';
+return '<hr class="sound-divider"><div class="sound-label" style="text-transform:none;"><span class="bar"></span>Plant − Based Recipe</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb" style="font-size:12px;">▶</div><div class="track-info"><div class="track-tag">Clean Eat / 美食</div><div class="track-title">'+v.title+'</div><div class="track-artist">'+v.channel+'</div></div><a class="track-play" href="'+v.url+'" target="_blank" rel="noopener">→</a></div>';
 }
 
 var actionVideos = [
@@ -516,7 +516,7 @@ return actionVideos[Math.floor(Math.random()*actionVideos.length)];
 }
 function buildActionVideoHtml(caption){
 var v=pickActionVideo();
-return '<hr class="sound-divider"><div class="sound-label" style="text-transform:none;"><span class="bar"></span>alo Wellness Club</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb">▶</div><div class="track-info"><div class="track-tag">Wellness / ととのい</div><div class="track-title">'+v.title+'</div><div class="track-artist">'+v.channel+'</div></div><a class="track-play" href="'+v.url+'" target="_blank" rel="noopener">→</a></div>';
+return '<hr class="sound-divider"><div class="sound-label" style="text-transform:none;"><span class="bar"></span>alo Wellness Club</div><p class="sound-caption">'+caption+'</p><div class="track-card"><div class="track-thumb" style="font-size:12px;">▶</div><div class="track-info"><div class="track-tag">Wellness / ととのい</div><div class="track-title">'+v.title+'</div><div class="track-artist">'+v.channel+'</div></div><a class="track-play" href="'+v.url+'" target="_blank" rel="noopener">→</a></div>';
 }
 
 var state={q1:null,q2:null,q3:null,q4:null,q5:null};
