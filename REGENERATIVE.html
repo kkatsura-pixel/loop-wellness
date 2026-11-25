@@ -43,13 +43,15 @@ html.line-app #screen-top { padding-bottom: 64px; }
 #screen-q5 { background: linear-gradient(rgba(250,248,244,0.23), rgba(250,248,244,0.23)), url('IMG_3107.jpg') no-repeat center center / cover; }
 .q-step { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 0.3em; color: #000; font-weight: 600; margin-bottom: 32px; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,255,255,1), 0 0 4px rgba(255,255,255,1), 0 1px 2px rgba(255,255,255,1); }
 .q-title { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 700; color: #000; letter-spacing: 0.1em; margin-bottom: 40px; line-height: 2.0; text-shadow: 0 0 12px rgba(255,255,255,1), 0 0 5px rgba(255,255,255,1), 0 1px 3px rgba(255,255,255,1); }
-.q-options { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.q-option { border: none; border-bottom: 1px solid #a89e8c; background: rgba(250,248,244,0.94); padding: 17px 20px; cursor: pointer; text-align: left; transition: all 0.25s; display: flex; flex-direction: column; gap: 5px; backdrop-filter: blur(3px); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-content: start; }
+.q-option { border: none; border-bottom: 1px solid #a89e8c; background: rgba(250,248,244,0.94); padding: 22px 4px 18px; cursor: pointer; text-align: center; transition: all 0.25s; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 12px; backdrop-filter: blur(3px); box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
 .q-option:hover { border-color: #8a8270; background: #e8e4dc; }
 .q-option.selected { border-color: #2a2018; background: #d8d2c4; box-shadow: inset 4px 0 0 #2a2018; }
 .q-option.selected .opt-main { color: #0e0c08; font-weight: 400; }
 .q-option.selected .opt-sub { color: #3a3228; }
-.opt-main { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 600; color: #000; letter-spacing: 0.08em; transition: all 0.25s; }
+.opt-icon { display: block; width: 44px; height: 44px; flex: 0 0 44px; color: #8a6a12; }
+.opt-icon svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.opt-main { line-height: 1.6; font-family: 'Noto Serif JP', serif; font-size: 13px; font-weight: 600; color: #000; letter-spacing: 0.04em; transition: all 0.25s; }
 .opt-sub { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; font-weight: 500; color: #1a1408; letter-spacing: 0.04em; }
 .q-nav { margin-top: 32px; text-align: right; }
 #screen-loading { background: linear-gradient(rgba(250,248,244,0.23), rgba(250,248,244,0.23)), url('IMG_3111.jpg') no-repeat center center / cover; align-items: center; justify-content: center; flex-direction: column; gap: 24px; }
@@ -137,10 +139,10 @@ setLineScreenHeight();
 <p class="q-step">Q1 / 4</p>
 <p class="q-title">今、優先したいテーマは？</p>
 <div class="q-options">
-<button class="q-option" onclick="selectQ('q1','姿勢・コンディション',this)"><span class="opt-main">姿勢・コンディション</span><span class="opt-sub">バランスを整える</span></button>
-<button class="q-option" onclick="selectQ('q1','ビューティー',this)"><span class="opt-main">ビューティー</span><span class="opt-sub">内側から輝く</span></button>
-<button class="q-option" onclick="selectQ('q1','ボディメイク・ダイエット',this)"><span class="opt-main">ボディメイク・ダイエット</span><span class="opt-sub">ラインをつくる</span></button>
-<button class="q-option" onclick="selectQ('q1','メンタル',this)"><span class="opt-main">メンタル</span><span class="opt-sub">リズムを整える</span></button>
+<button class="q-option" onclick="selectQ('q1','姿勢・コンディション',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="9" r="4"/><path d="M16 19h16M24 15v15M24 30l-5 11M24 30l5 11"/></svg></span><span class="opt-main">姿勢・コンディション</span></button>
+<button class="q-option" onclick="selectQ('q1','ビューティー',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><path d="M22 10c1 9 5 13 14 14-9 1-13 5-14 14-1-9-5-13-14-14 9-1 13-5 14-14z"/><path d="M37 6v7M33.5 9.5h7"/></svg></span><span class="opt-main">ビューティー</span></button>
+<button class="q-option" onclick="selectQ('q1','ボディメイク・ダイエット',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><rect x="6" y="19" width="5" height="10" rx="1"/><rect x="11" y="15" width="4" height="18" rx="1"/><path d="M15 24h18"/><rect x="33" y="15" width="4" height="18" rx="1"/><rect x="37" y="19" width="5" height="10" rx="1"/></svg></span><span class="opt-main">ボディメイク<br>ダイエット</span></button>
+<button class="q-option" onclick="selectQ('q1','メンタル',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><path d="M24 10c5 6 5 16 0 24-5-8-5-18 0-24z"/><path d="M24 34c-8 0-14-5-15-13 8 0 13 4 15 13zM24 34c8 0 14-5 15-13-8 0-13 4-15 13z"/><path d="M15 40h18"/></svg></span><span class="opt-main">メンタル</span></button>
 </div>
 </div>
 
@@ -148,10 +150,10 @@ setLineScreenHeight();
 <p class="q-step">Q2 / 4</p>
 <p class="q-title">最近のコンディションは？</p>
 <div class="q-options">
-<button class="q-option" onclick="selectQ('q2','良好・安定している',this)"><span class="opt-main">良好</span><span class="opt-sub">安定している</span></button>
-<button class="q-option" onclick="selectQ('q2','やや疲労・少し違和感',this)"><span class="opt-main">やや疲労</span><span class="opt-sub">少し違和感を感じる</span></button>
-<button class="q-option" onclick="selectQ('q2','疲れが続いている・滞り抜けにくい',this)"><span class="opt-main">疲れが続いている</span><span class="opt-sub">滞り抜けにくい状態</span></button>
-<button class="q-option" onclick="selectQ('q2','不安定・波がある',this)"><span class="opt-main">不安定</span><span class="opt-sub">波がある状態</span></button>
+<button class="q-option" onclick="selectQ('q2','良好・安定している',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="7"/><path d="M24 8v5M24 35v5M8 24h5M35 24h5M12.7 12.7l3.5 3.5M31.8 31.8l3.5 3.5M12.7 35.3l3.5-3.5M31.8 16.2l3.5-3.5"/></svg></span><span class="opt-main">良好</span></button>
+<button class="q-option" onclick="selectQ('q2','やや疲労・少し違和感',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><path d="M15 34a7 7 0 0 1 0-14 10 10 0 0 1 19-2 7.5 7.5 0 0 1 1 16z"/></svg></span><span class="opt-main">やや疲労</span></button>
+<button class="q-option" onclick="selectQ('q2','疲れが続いている・滞り抜けにくい',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><path d="M15 9h18M15 39h18M16 9c0 8 8 10 8 15s-8 7-8 15M32 9c0 8-8 10-8 15s8 7 8 15"/></svg></span><span class="opt-main">疲れが続いている</span></button>
+<button class="q-option" onclick="selectQ('q2','不安定・波がある',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><path d="M7 19c4-6 8-6 12 0s8 6 12 0 8-6 10 0M7 30c4-6 8-6 12 0s8 6 12 0 8-6 10 0"/></svg></span><span class="opt-main">不安定</span></button>
 </div>
 </div>
 
@@ -165,10 +167,10 @@ setLineScreenHeight();
 <p class="q-step">Q4 / 4</p>
 <p class="q-title">自分の時間、取れていますか？</p>
 <div class="q-options">
-<button class="q-option" onclick="selectQ('q5','十分取れている',this)"><span class="opt-main">十分取れている</span><span class="opt-sub">余白のある日々を送れている</span></button>
-<button class="q-option" onclick="selectQ('q5','少し足りない',this)"><span class="opt-main">少し足りない</span><span class="opt-sub">もう少し自分時間がほしい</span></button>
-<button class="q-option" onclick="selectQ('q5','ほとんど取れていない',this)"><span class="opt-main">ほとんど取れていない</span><span class="opt-sub">他のことで精一杯な状態</span></button>
-<button class="q-option" onclick="selectQ('q5','意識したことがなかった',this)"><span class="opt-main">意識したことがなかった</span><span class="opt-sub">自分時間という概念がなかった</span></button>
+<button class="q-option" onclick="selectQ('q5','十分取れている',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="9"/></svg></span><span class="opt-main">十分取れている</span></button>
+<button class="q-option" onclick="selectQ('q5','少し足りない',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10a14 14 0 0 1 0 28z" fill="currentColor" fill-opacity=".3"/></svg></span><span class="opt-main">少し足りない</span></button>
+<button class="q-option" onclick="selectQ('q5','ほとんど取れていない',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14"/><path d="M24 10a14 14 0 1 0 0 28 8 14 0 0 1 0-28z" fill="currentColor" fill-opacity=".3"/></svg></span><span class="opt-main">ほとんど取れていない</span></button>
+<button class="q-option" onclick="selectQ('q5','意識したことがなかった',this)"><span class="opt-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke-dasharray="1.5 4"/></svg></span><span class="opt-main">意識してなかった</span></button>
 </div>
 </div>
 
@@ -521,11 +523,42 @@ return '<hr class="sound-divider"><div class="sound-label" style="text-transform
 }
 
 var state={q1:null,q2:null,q3:null,q4:null,q5:null};
+var optIcons={
+posture:'<circle cx="24" cy="9" r="4"/><path d="M16 19h16M24 15v15M24 30l-5 11M24 30l5 11"/>',
+beauty:'<path d="M22 10c1 9 5 13 14 14-9 1-13 5-14 14-1-9-5-13-14-14 9-1 13-5 14-14z"/><path d="M37 6v7M33.5 9.5h7"/>',
+body:'<rect x="6" y="19" width="5" height="10" rx="1"/><rect x="11" y="15" width="4" height="18" rx="1"/><path d="M15 24h18"/><rect x="33" y="15" width="4" height="18" rx="1"/><rect x="37" y="19" width="5" height="10" rx="1"/>',
+mind:'<path d="M24 10c5 6 5 16 0 24-5-8-5-18 0-24z"/><path d="M24 34c-8 0-14-5-15-13 8 0 13 4 15 13zM24 34c8 0 14-5 15-13-8 0-13 4-15 13z"/><path d="M15 40h18"/>',
+sun:'<circle cx="24" cy="24" r="7"/><path d="M24 8v5M24 35v5M8 24h5M35 24h5M12.7 12.7l3.5 3.5M31.8 31.8l3.5 3.5M12.7 35.3l3.5-3.5M31.8 16.2l3.5-3.5"/>',
+cloud:'<path d="M15 34a7 7 0 0 1 0-14 10 10 0 0 1 19-2 7.5 7.5 0 0 1 1 16z"/>',
+hourglass:'<path d="M15 9h18M15 39h18M16 9c0 8 8 10 8 15s-8 7-8 15M32 9c0 8-8 10-8 15s8 7 8 15"/>',
+wave:'<path d="M7 19c4-6 8-6 12 0s8 6 12 0 8-6 10 0M7 30c4-6 8-6 12 0s8 6 12 0 8-6 10 0"/>',
+neck:'<circle cx="24" cy="15" r="7"/><path d="M20 22v7M28 22v7M9 41c0-7 8-11 15-11s15 4 15 11"/>',
+shoulder:'<path d="M5 32c2-7 8-12 15-13l4 4 4-4c7 1 13 6 15 13"/><path d="M24 23v15" stroke-dasharray="1 3"/>',
+lumbar:'<path d="M24 8v8M24 20v4M24 28v4M24 36v4" stroke-dasharray="0.1 0.1" stroke-width="3.2"/><path d="M13 26c-4 5-4 9 0 14M35 26c4 5 4 9 0 14"/>',
+balance:'<circle cx="24" cy="10" r="3"/><path d="M24 13v27M11 40h26M17 22h14M15 30h18"/>',
+drop:'<path d="M24 8c8 10 12 16 12 22a12 12 0 0 1-24 0c0-6 4-12 12-22z"/><path d="M18 31a6 6 0 0 0 5 6"/>',
+face:'<path d="M14 12h20v12c0 9-5 15-10 15s-10-6-10-15z"/><path d="M19 26c1.5 2 8.500 2 10 0"/>',
+drops:'<path d="M18 10c4 6 7 9 7 13a7 7 0 0 1-14 0c0-4 3-7 7-13z"/><path d="M33 22c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z"/>',
+leaf:'<path d="M10 37C10 21 21 10 38 10 38 27 27 37 10 37z"/><path d="M10 37L31 17"/>',
+hip:'<path d="M17 8c0 8-5 10-5 18 0 6 4 9 12 9s12-3 12-9c0-8-5-10-5-18"/><path d="M24 14v4" stroke-dasharray="0.1 3" stroke-width="2.4"/>',
+waist:'<path d="M13 9c0 6 5 9 5 15s-5 9-5 15M35 9c0 6-5 9-5 15s5 9 5 15M13 9h22"/><path d="M11 24h26" stroke-dasharray="2 3"/>',
+arm:'<path d="M17 8c4-1 10-1 14 0M17 8c-1 10 0 20 2 32M31 8c1 10 0 20-2 32M19 40h10"/><path d="M17.500 24c4 3 9 3 13 0" stroke-dasharray="2 3"/>',
+whole:'<circle cx="24" cy="12" r="3.5"/><path d="M24 17v13M16 21l8-3 8 3M24 30l-5 10M24 30l5 10"/><ellipse cx="24" cy="26" rx="17" ry="19" stroke-dasharray="1 3"/>',
+spiral:'<path d="M24 24a2 2 0 0 1 4 0 5 5 0 0 1-10 0 8 8 0 0 1 16 0 11 11 0 0 1-22 0 14 14 0 0 1 28 0"/>',
+battery:'<rect x="8" y="17" width="28" height="14" rx="2"/><path d="M36 21h3v6h-3"/><rect x="11" y="20" width="6" height="8" rx="1"/>',
+target:'<circle cx="24" cy="24" r="15"/><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="2.500"/>',
+moon:'<path d="M31 9a15 15 0 1 0 8 25A12 12 0 0 1 31 9z"/>',
+full:'<circle cx="24" cy="24" r="14"/><circle cx="24" cy="24" r="9"/>',
+half:'<circle cx="24" cy="24" r="14"/><path d="M24 10a14 14 0 0 1 0 28z" fill="currentColor" fill-opacity=".3"/>',
+crescent:'<circle cx="24" cy="24" r="14"/><path d="M24 10a14 14 0 1 0 0 28 8 14 0 0 1 0-28z" fill="currentColor" fill-opacity=".3"/>',
+dotted:'<circle cx="24" cy="24" r="14" stroke-dasharray="1.5 4"/>'
+};
+function optIconHtml(k){return '<span class="opt-icon"><svg viewBox="0 0 48 48">'+optIcons[k]+'</svg></span>';}
 var q3Map={
-'姿勢・コンディション':{title:'どの部位に意識を向けますか？',opts:[{v:'首・頭まわり（こりや重さ）',m:'首・頭まわり',s:'こりや重さを感じる'},{v:'肩・肩甲骨（緊張や動かしにくさ）',m:'肩・肩甲骨',s:'緊張や動かしにくさ'},{v:'腰まわり（張りや違和感）',m:'腰まわり',s:'張りや違和感'},{v:'姿勢バランス（背中・骨盤）',m:'姿勢バランス',s:'背中・骨盤の整い'}]},
-'ビューティー':{title:'どの変化に意識を向けますか？',opts:[{v:'肌（乾燥・くすみ・ハリ・ツヤ）',m:'肌',s:'乾燥・くすみ・ハリ・ツヤ'},{v:'フェイスライン（印象・輪郭）',m:'フェイスライン',s:'印象・輪郭'},{v:'むくみ（巡り・すっきり感）',m:'むくみ',s:'巡り・すっきり感'},{v:'内側のバランス（栄養・コンディション）',m:'内側のバランス',s:'栄養・コンディション'}]},
-'ボディメイク・ダイエット':{title:'どのラインを整えたいですか？',opts:[{v:'ヒップ（引き上げ・安定）',m:'ヒップ',s:'引き上げ・安定'},{v:'ウエスト（くびれ・ライン）',m:'ウエスト',s:'くびれ・ライン'},{v:'二の腕（引き締め）',m:'二の腕',s:'引き締め'},{v:'全身バランス（体脂肪・シルエット）',m:'全身バランス',s:'体脂肪・シルエット'}]},
-'メンタル':{title:'今の状態に近いものは？',opts:[{v:'ストレスを感じる（緊張や負担）',m:'ストレスを感じる',s:'緊張や負担'},{v:'疲れが抜けにくい（回復しにくい）',m:'疲れが抜けにくい',s:'回復しにくい'},{v:'集中しにくい（思考の乱れ）',m:'集中しにくい',s:'思考の乱れ'},{v:'睡眠の質が低い（休息の浅さ）',m:'睡眠の質が低い',s:'休息の浅さ'}]}
+'姿勢・コンディション':{title:'どの部位に意識を向けますか？',opts:[{v:'首・頭まわり（こりや重さ）',m:'首・頭まわり',i:'neck',s:'こりや重さを感じる'},{v:'肩・肩甲骨（緊張や動かしにくさ）',m:'肩・肩甲骨',i:'shoulder',s:'緊張や動かしにくさ'},{v:'腰まわり（張りや違和感）',m:'腰まわり',i:'lumbar',s:'張りや違和感'},{v:'姿勢バランス（背中・骨盤）',m:'姿勢バランス',i:'balance',s:'背中・骨盤の整い'}]},
+'ビューティー':{title:'どの変化に意識を向けますか？',opts:[{v:'肌（乾燥・くすみ・ハリ・ツヤ）',m:'肌',i:'drop',s:'乾燥・くすみ・ハリ・ツヤ'},{v:'フェイスライン（印象・輪郭）',m:'フェイスライン',i:'face',s:'印象・輪郭'},{v:'むくみ（巡り・すっきり感）',m:'むくみ',i:'drops',s:'巡り・すっきり感'},{v:'内側のバランス（栄養・コンディション）',m:'内側のバランス',i:'leaf',s:'栄養・コンディション'}]},
+'ボディメイク・ダイエット':{title:'どのラインを整えたいですか？',opts:[{v:'ヒップ（引き上げ・安定）',m:'ヒップ',i:'hip',s:'引き上げ・安定'},{v:'ウエスト（くびれ・ライン）',m:'ウエスト',i:'waist',s:'くびれ・ライン'},{v:'二の腕（引き締め）',m:'二の腕',i:'arm',s:'引き締め'},{v:'全身バランス（体脂肪・シルエット）',m:'全身バランス',i:'whole',s:'体脂肪・シルエット'}]},
+'メンタル':{title:'今の状態に近いものは？',opts:[{v:'ストレスを感じる（緊張や負担）',m:'ストレスを感じる',i:'spiral',s:'緊張や負担'},{v:'疲れが抜けにくい（回復しにくい）',m:'疲れが抜けにくい',i:'battery',s:'回復しにくい'},{v:'集中しにくい（思考の乱れ）',m:'集中しにくい',i:'target',s:'思考の乱れ'},{v:'睡眠の質が低い（休息の浅さ）',m:'睡眠の質が低い',i:'moon',s:'休息の浅さ'}]}
 };
 
 (function(){
@@ -577,7 +610,7 @@ state.q3=null;
 d.opts.forEach(function(opt){
 var el=document.createElement('button');
 el.className='q-option';
-el.innerHTML='<span class="opt-main">'+opt.m+'</span><span class="opt-sub">'+opt.s+'</span>';
+el.innerHTML=optIconHtml(opt.i)+'<span class="opt-main">'+opt.m+'</span>';
 el.onclick=function(){selectQ('q3',opt.v,el);};
 c.appendChild(el);
 });
