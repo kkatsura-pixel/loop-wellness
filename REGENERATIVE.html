@@ -589,7 +589,7 @@ vB.play().then(function(){ vB.pause(); vB.currentTime = 0; }).catch(function(){}
 
 function goTo(s){
 document.querySelectorAll('.screen').forEach(function(x){x.classList.remove('active');});
-document.getElementById('screen-'+s).classList.add('active');
+var _sc=document.getElementById('screen-'+s);_sc.classList.add('active');_sc.scrollTop=0;
 if(s==='q3')buildQ3();
 }
 function selectQ(q,val,el){
@@ -772,6 +772,8 @@ state={q1:null,q2:null,q3:null,q4:null,q5:null};
 document.querySelectorAll('.q-option').forEach(function(b){b.classList.remove('selected');});
 document.getElementById('loading-text').innerHTML='あなたの今を、静かに読み取りながら<br>あなただけのinsightを、ひもといています';
 document.getElementById('loading-fallback-btn').style.display='none';
+['insight','action','evidence','recipe'].forEach(function(id){var b=document.getElementById('result-'+id),t=document.getElementById('btn-'+id);if(b)b.classList.remove('open');if(t){t.textContent='詳しく見る→';t.classList.add('is-closed');}});
+['block-sensory','block-insight','block-evidence','block-action','block-recipe'].forEach(function(id){var e=document.getElementById(id);if(e){e.style.opacity='0';e.style.transform='translateY(20px)';}});
 goTo('top');
 }
 </script>
